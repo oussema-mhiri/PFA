@@ -193,6 +193,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: none;
             position: relative;
+            cursor: pointer;
         }
         .card:hover { 
             transform: translateY(-10px); 
@@ -215,28 +216,16 @@
         .card-content { padding: 1.5rem; }
         .card h3 { color: #003f5f; margin-bottom: 0.8rem; font-size: 1.3rem; }
 
-        /* Badges */
-        .badge-license {
-            background: linear-gradient(135deg, #00a1ab20, #003f5f20);
-            color: #003f5f;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: bold;
+        /* Club Badges */
+        .club-badge {
             display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .badge-master {
-            background: linear-gradient(135deg, #f39c1220, #e67e2220);
-            color: #e67e22;
-        }
-        .badge-ing {
-            background: linear-gradient(135deg, #3498db20, #2980b920);
-            color: #2980b9;
-        }
-        .badge-doctorat {
-            background: linear-gradient(135deg, #e74c3c20, #c0392b20);
-            color: #c0392b;
+            background: #00a1ab20;
+            color: #00a1ab;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
         }
 
         /* Formulaire */
@@ -289,7 +278,7 @@
             display: none;
         }
 
-        /* Sprint 4 - Resources */
+        /* Resource Grid */
         .resource-toolbar {
             display: grid;
             grid-template-columns: 1.1fr 1fr 1fr auto;
@@ -448,7 +437,7 @@
             text-align: center;
         }
 
-        /* Sprint 4 - Events */
+        /* Events */
         .events-shell {
             display: grid;
             grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
@@ -647,118 +636,6 @@
             color: #17713c;
         }
 
-        /* Connected Space */
-        .auth-shell,
-        .dashboard-shell {
-            display: grid;
-            gap: 1.5rem;
-        }
-        .auth-shell {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            margin-bottom: 2rem;
-        }
-        .auth-card {
-            background: linear-gradient(180deg, #ffffff, #f8fbfc);
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.05);
-        }
-        .demo-accounts {
-            display: grid;
-            gap: 0.6rem;
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 16px;
-            background: #f4fbfc;
-            color: #4a5d6c;
-            font-size: 0.9rem;
-        }
-        .dashboard-header-bar {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .dashboard-tabs {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        .dashboard-tab {
-            border: none;
-            background: #edf4f6;
-            color: #003f5f;
-            border-radius: 999px;
-            padding: 0.8rem 1rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .dashboard-tab.active {
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-            color: white;
-        }
-        .dashboard-panel {
-            display: none;
-        }
-        .dashboard-panel.active {
-            display: block;
-        }
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .stack-list {
-            display: grid;
-            gap: 0.8rem;
-        }
-        .stack-item {
-            background: #f7fbfc;
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 18px;
-            padding: 1rem;
-        }
-        .stack-item-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.8rem;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            margin-bottom: 0.6rem;
-        }
-        .stack-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-        }
-        .mini-btn {
-            border: none;
-            border-radius: 12px;
-            padding: 0.65rem 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .mini-btn.primary {
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-            color: white;
-        }
-        .mini-btn.secondary {
-            background: #edf4f6;
-            color: #003f5f;
-        }
-        .mini-btn.danger {
-            background: #fde8ea;
-            color: #8d2231;
-        }
-        .mini-btn.success {
-            background: #e2f6e7;
-            color: #1c7540;
-        }
-
         /* Footer */
         footer {
             background: #1a2c3a;
@@ -862,7 +739,6 @@
                 <li><a href="#cours">Cours</a></li>
                 <li><a href="#ressources">Ressources</a></li>
                 <li><a href="#evenements">Événements</a></li>
-                <li><a href="#espace">Espace</a></li>
                 <li><a href="#inscription">Inscription</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -876,7 +752,6 @@
             <p>Institut Supérieur d'Informatique et des Technologies de Communication • Université de Sousse</p>
             <div style="position: relative; z-index: 1; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
                 <a href="#licences" class="btn">Découvrir nos formations</a>
-                <a href="#espace" class="btn" style="background:#f4fbfc;">Accéder à EduConnect</a>
             </div>
         </section>
 
@@ -1038,22 +913,23 @@
                 </div>
             </section>
 
-            <!-- Vie étudiante - Clubs -->
+            <!-- Clubs Section -->
             <section id="clubs" class="section">
                 <h2 class="section-title">Vie associative & clubs</h2>
-                <p class="section-subtitle">Consultez les clubs, envoyez une demande d’adhésion et suivez les actualités publiées par les responsables</p>
+                <p class="section-subtitle">Découvrez les clubs de l'ISITCOM, rejoignez-les et suivez leurs actualités</p>
                 <div id="clubsGrid" class="cards-grid"></div>
-                <div style="margin-top:2rem;">
-                    <h3 style="margin-bottom:1rem; color:#003f5f;">Actualités des clubs</h3>
+                <div style="margin-top: 3rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: #003f5f; text-align: center;">📢 Actualités des clubs</h3>
                     <div id="clubNewsFeed" class="resource-grid"></div>
                 </div>
             </section>
 
+            <!-- Cours Section -->
             <section id="cours" class="section">
                 <h2 class="section-title">Cours par formation</h2>
-                <p class="section-subtitle">Sprint 3 : consultation des cours par filière avec recherche, filtres et téléchargement</p>
+                <p class="section-subtitle">Consultez et téléchargez les cours par filière</p>
                 <div class="resource-toolbar">
-                    <input type="search" id="courseSearch" placeholder="Rechercher un cours, un module ou un enseignant...">
+                    <input type="search" id="courseSearch" placeholder="Rechercher un cours...">
                     <select id="courseFormationFilter">
                         <option value="all">Toutes les formations</option>
                         <option value="Multimédia">Multimédia</option>
@@ -1062,21 +938,7 @@
                         <option value="Cycle Ingénieur">Cycle Ingénieur</option>
                         <option value="Masters">Masters</option>
                     </select>
-                    <select id="courseSemesterFilter">
-                        <option value="all">Tous les semestres</option>
-                        <option value="Semestre 1">Semestre 1</option>
-                        <option value="Semestre 2">Semestre 2</option>
-                        <option value="Annuel">Annuel</option>
-                    </select>
                     <button type="button" id="courseReset" class="btn">Réinitialiser</button>
-                </div>
-                <div class="resource-summary">
-                    <p><strong id="courseCount">0</strong> cours disponible(s)</p>
-                    <div class="resource-tags">
-                        <span class="resource-tag">Par licence</span>
-                        <span class="resource-tag">Téléchargement</span>
-                        <span class="resource-tag">Sprint 3</span>
-                    </div>
                 </div>
                 <div id="courseGrid" class="resource-grid"></div>
             </section>
@@ -1084,63 +946,24 @@
             <!-- Ressources -->
             <section id="ressources" class="section">
                 <h2 class="section-title">Ressources pour étudiants</h2>
-                <p class="section-subtitle">Sprint 4 : explorez les cours, examens et rapports PFE avec filtres, recherche et téléchargement direct</p>
-                <div class="resource-toolbar">
-                    <input type="search" id="resourceSearch" placeholder="Rechercher un titre, une matière ou un mot-clé...">
-                    <select id="resourceTypeFilter">
-                        <option value="all">Tous les types</option>
-                        <option value="cours">Cours</option>
-                        <option value="examens">Examens</option>
-                        <option value="pfe">PFE</option>
-                    </select>
-                    <select id="resourceFormationFilter">
-                        <option value="all">Toutes les formations</option>
-                        <option value="Multimédia">Multimédia</option>
-                        <option value="IoT">IoT</option>
-                        <option value="Télécom">Télécom</option>
-                        <option value="Cycle Ingénieur">Cycle Ingénieur</option>
-                        <option value="Masters">Masters</option>
-                    </select>
-                    <button type="button" id="resourceReset" class="btn">Réinitialiser</button>
-                </div>
-                <div class="resource-summary">
-                    <p><strong id="resourceCount">0</strong> ressource(s) disponible(s)</p>
-                    <div class="resource-tags">
-                        <span class="resource-tag">Téléchargement direct</span>
-                        <span class="resource-tag">Filtres combinés</span>
-                        <span class="resource-tag">Sprint 4</span>
-                    </div>
-                </div>
+                <p class="section-subtitle">Explorez les cours, examens et rapports PFE avec téléchargement direct</p>
                 <div id="resourceGrid" class="resource-grid"></div>
             </section>
 
             <!-- Événements -->
             <section id="evenements" class="section">
                 <h2 class="section-title">Agenda & événements</h2>
-                <p class="section-subtitle">Calendrier interactif, fiches détaillées et inscription aux événements de l'institut</p>
+                <p class="section-subtitle">Calendrier interactif et inscription aux événements</p>
                 <div class="events-shell">
                     <div class="calendar-card">
                         <div class="calendar-header">
-                            <div>
-                                <h3>Calendrier Sprint 4</h3>
-                                <p style="color:#5d6d7e;">Vue mensuelle interactive avec ouverture des détails en un clic</p>
-                            </div>
-                            <span class="calendar-badge">FullCalendar</span>
-                        </div>
-                        <div class="event-stats">
-                            <div class="event-stat"><strong id="eventCount">0</strong><span>événements</span></div>
-                            <div class="event-stat"><strong id="openSeats">0</strong><span>places restantes</span></div>
-                            <div class="event-stat"><strong id="registrationCount">0</strong><span>inscriptions locales</span></div>
+                            <h3>Calendrier des événements</h3>
                         </div>
                         <div id="calendar"></div>
                     </div>
                     <div class="event-panel">
                         <div class="event-panel-header">
-                            <div>
-                                <h3>Liste rapide</h3>
-                                <p style="color:#5d6d7e;">Sélectionnez un événement pour voir les détails ou vous inscrire</p>
-                            </div>
-                            <span class="resource-tag">Inscription locale</span>
+                            <h3>Événements à venir</h3>
                         </div>
                         <div id="eventList" class="event-list"></div>
                     </div>
@@ -1153,7 +976,7 @@
                 <p class="section-subtitle">Rejoignez la communauté ISITCOM en remplissant ce formulaire</p>
                 
                 <div id="formSuccessMessage" class="success-message">
-                    ✅ Inscription réussie ! Bienvenue à l'ISITCOM. Vous recevrez un email de confirmation.
+                    ✅ Inscription réussie ! Bienvenue à l'ISITCOM.
                 </div>
                 
                 <form id="studentForm">
@@ -1218,272 +1041,6 @@
                     <div class="card"><div class="card-content"><i class="fas fa-phone"></i> <h3>Téléphone</h3><p>+216 73 123 456</p></div></div>
                 </div>
             </section>
-
-            <section id="espace" class="section">
-                <h2 class="section-title">EduConnect - Espace connecté</h2>
-                <p class="section-subtitle">Prototype fonctionnel jusqu’au Sprint 4 avec authentification locale, rôles et gestion des contenus</p>
-                <div class="auth-shell">
-                    <div class="auth-card">
-                        <h3>Connexion</h3>
-                        <p style="color:#5d6d7e; margin-bottom:1rem;">Connectez-vous avec un compte étudiant, responsable club ou administrateur.</p>
-                        <form id="loginForm" class="event-form-grid">
-                            <div class="form-group">
-                                <label for="loginEmail">Email</label>
-                                <input type="email" id="loginEmail" placeholder="email@isitcom.rnu.tn" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="loginPassword">Mot de passe</label>
-                                <input type="password" id="loginPassword" placeholder="••••••••" required>
-                            </div>
-                            <div id="loginFeedback" class="event-register-feedback"></div>
-                            <button type="submit" class="btn btn-submit">Se connecter</button>
-                        </form>
-                        <div class="demo-accounts">
-                            <div><strong>Étudiant :</strong> student@isitcom.tn / student123</div>
-                            <div><strong>Responsable club :</strong> club@isitcom.tn / club123</div>
-                            <div><strong>Admin :</strong> admin@isitcom.tn / admin123</div>
-                        </div>
-                    </div>
-                    <div class="auth-card">
-                        <h3>Créer un compte étudiant</h3>
-                        <p style="color:#5d6d7e; margin-bottom:1rem;">Inscription locale pour tester les parcours étudiants et les demandes d’adhésion.</p>
-                        <form id="registerForm" class="event-form-grid">
-                            <div class="form-group">
-                                <label for="registerName">Nom complet</label>
-                                <input type="text" id="registerName" placeholder="Votre nom complet" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerEmail">Email</label>
-                                <input type="email" id="registerEmail" placeholder="prenom.nom@isitcom.rnu.tn" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerFormation">Formation</label>
-                                <select id="registerFormation" required></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="registerPassword">Mot de passe</label>
-                                <input type="password" id="registerPassword" placeholder="Minimum 6 caractères" required>
-                            </div>
-                            <div id="registerFeedback" class="event-register-feedback"></div>
-                            <button type="submit" class="btn btn-submit">Créer le compte</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="dashboard-shell">
-                    <div class="dashboard-header-bar">
-                        <div>
-                            <h3 id="dashboardWelcome">Aucun utilisateur connecté</h3>
-                            <p id="dashboardSubtitle" style="color:#5d6d7e;">Connectez-vous pour accéder aux tableaux de bord et aux outils de gestion.</p>
-                        </div>
-                        <button type="button" id="logoutBtn" class="btn" style="display:none;">Se déconnecter</button>
-                    </div>
-                    <div class="dashboard-tabs">
-                        <button class="dashboard-tab active" data-tab="student">Étudiant</button>
-                        <button class="dashboard-tab" data-tab="manager">Responsable club</button>
-                        <button class="dashboard-tab" data-tab="admin">Gestion contenus</button>
-                    </div>
-
-                    <div id="studentPanel" class="dashboard-panel active">
-                        <div class="dashboard-stats">
-                            <div class="event-stat"><strong id="studentMembershipCount">0</strong><span>clubs suivis</span></div>
-                            <div class="event-stat"><strong id="studentEventCount">0</strong><span>événements inscrits</span></div>
-                            <div class="event-stat"><strong id="studentCourseCount">0</strong><span>cours suggérés</span></div>
-                        </div>
-                        <div class="resource-grid">
-                            <div class="auth-card">
-                                <h3>Mes clubs</h3>
-                                <div id="studentMembershipsList" class="stack-list"></div>
-                            </div>
-                            <div class="auth-card">
-                                <h3>Mes événements</h3>
-                                <div id="studentEventsList" class="stack-list"></div>
-                            </div>
-                            <div class="auth-card">
-                                <h3>Cours recommandés</h3>
-                                <div id="studentCoursesList" class="stack-list"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="managerPanel" class="dashboard-panel">
-                        <div class="resource-grid">
-                            <div class="auth-card">
-                                <h3>Demandes d’adhésion</h3>
-                                <div id="managerMembershipRequests" class="stack-list"></div>
-                            </div>
-                            <div class="auth-card">
-                                <h3>Publier une actualité</h3>
-                                <form id="clubNewsForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="clubNewsTitle">Titre</label>
-                                        <input type="text" id="clubNewsTitle" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="clubNewsContent">Contenu</label>
-                                        <input type="text" id="clubNewsContent" required>
-                                    </div>
-                                    <div id="clubNewsFeedback" class="event-register-feedback"></div>
-                                    <button type="submit" class="btn btn-submit">Publier</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="adminPanel" class="dashboard-panel">
-                        <div class="resource-grid">
-                            <div class="auth-card">
-                                <h3>Gérer les formations</h3>
-                                <form id="formationForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="formationName">Nom de la formation</label>
-                                        <input type="text" id="formationName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="formationLevel">Niveau</label>
-                                        <input type="text" id="formationLevel" placeholder="Licence / Ingénieur / Master" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-submit">Ajouter la formation</button>
-                                </form>
-                                <div id="formationsAdminList" class="stack-list" style="margin-top:1rem;"></div>
-                            </div>
-
-                            <div class="auth-card">
-                                <h3>Gérer les clubs</h3>
-                                <form id="clubForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="adminClubName">Nom du club</label>
-                                        <input type="text" id="adminClubName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminClubCategory">Catégorie</label>
-                                        <input type="text" id="adminClubCategory" placeholder="Technologique / Culturel / Robotique" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminClubDescription">Description</label>
-                                        <input type="text" id="adminClubDescription" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminClubManager">Email du responsable</label>
-                                        <input type="email" id="adminClubManager" placeholder="club@isitcom.tn" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-submit">Ajouter le club</button>
-                                </form>
-                                <div id="clubsAdminList" class="stack-list" style="margin-top:1rem;"></div>
-                            </div>
-
-                            <div class="auth-card">
-                                <h3>Gérer les cours</h3>
-                                <form id="courseForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="adminCourseTitle">Titre</label>
-                                        <input type="text" id="adminCourseTitle" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminCourseFormation">Formation</label>
-                                        <select id="adminCourseFormation" required></select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminCourseSemester">Semestre</label>
-                                        <select id="adminCourseSemester" required>
-                                            <option value="Semestre 1">Semestre 1</option>
-                                            <option value="Semestre 2">Semestre 2</option>
-                                            <option value="Annuel">Annuel</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminCourseTeacher">Enseignant</label>
-                                        <input type="text" id="adminCourseTeacher" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminCourseFile">Fichier du cours</label>
-                                        <input type="file" id="adminCourseFile" accept=".pdf,.txt,.doc,.docx,.ppt,.pptx">
-                                    </div>
-                                    <button type="submit" class="btn btn-submit">Ajouter le cours</button>
-                                </form>
-                                <div id="coursesAdminList" class="stack-list" style="margin-top:1rem;"></div>
-                            </div>
-
-                            <div class="auth-card">
-                                <h3>Gérer les ressources</h3>
-                                <form id="resourceForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="adminResourceTitle">Titre</label>
-                                        <input type="text" id="adminResourceTitle" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceType">Type</label>
-                                        <select id="adminResourceType" required>
-                                            <option value="cours">Cours</option>
-                                            <option value="examens">Examens</option>
-                                            <option value="pfe">PFE</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceFormation">Formation</label>
-                                        <select id="adminResourceFormation" required></select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceLevel">Niveau</label>
-                                        <input type="text" id="adminResourceLevel" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceYear">Année / Session</label>
-                                        <input type="text" id="adminResourceYear" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceDescription">Description</label>
-                                        <input type="text" id="adminResourceDescription" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminResourceFile">Fichier</label>
-                                        <input type="file" id="adminResourceFile" accept=".pdf,.txt,.doc,.docx">
-                                    </div>
-                                    <button type="submit" class="btn btn-submit">Ajouter la ressource</button>
-                                </form>
-                                <div id="resourcesAdminList" class="stack-list" style="margin-top:1rem;"></div>
-                            </div>
-
-                            <div class="auth-card">
-                                <h3>Gérer les événements</h3>
-                                <form id="eventForm" class="event-form-grid">
-                                    <div class="form-group">
-                                        <label for="adminEventTitle">Titre</label>
-                                        <input type="text" id="adminEventTitle" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminEventDate">Date</label>
-                                        <input type="date" id="adminEventDate" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminEventLocation">Lieu</label>
-                                        <input type="text" id="adminEventLocation" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminEventOrganizer">Organisateur</label>
-                                        <input type="text" id="adminEventOrganizer" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminEventCapacity">Capacité</label>
-                                        <input type="number" id="adminEventCapacity" min="1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adminEventDescription">Description</label>
-                                        <input type="text" id="adminEventDescription" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-submit">Ajouter l’événement</button>
-                                </form>
-                                <div id="eventsAdminList" class="stack-list" style="margin-top:1rem;"></div>
-                            </div>
-
-                            <div class="auth-card">
-                                <h3>Valider les inscriptions clubs</h3>
-                                <div id="adminMembershipRequests" class="stack-list"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -1501,188 +1058,71 @@
     <div id="modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3 id="modal-title"></h3><div id="modal-message"></div><button onclick="closeModal()" class="btn" style="margin-top:1rem;">Fermer</button></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales-all.global.min.js"></script>
     <script>
-        const STORAGE_KEY = 'isitcom-sprint4-registrations';
-        const formationOptions = [
-            'Licence Multimédia',
-            'Licence IoT & Embarqué',
-            'Licence Télécom & Réseaux',
-            'Cycle Ingénieur Téléinformatique',
-            'Master Sécurité des Réseaux',
-            'Master Services du Web',
-            'Master IA & Data Science',
-            'Doctorat'
-        ];
-
-        function buildDownloadUrl(content) {
-            return `data:text/plain;charset=utf-8,${encodeURIComponent(content)}`;
-        }
-
-        const resources = [
+        // Données des clubs
+        const clubs = [
             {
                 id: 1,
-                title: 'Développement Front-End React',
-                type: 'cours',
-                formation: 'Multimédia',
-                level: 'L3',
-                year: 'Semestre 2',
-                description: 'Supports de cours, exercices guidés et mini projet React/Vite pour les étudiants multimédia.',
-                fileName: 'cours-react-multimedia.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Cours React\n\nContenu:\n- Composants et props\n- State et hooks\n- Routing\n- Mini projet portfolio\n')
+                name: "ATAST ISITCOM",
+                category: "🏆 Club Technologique",
+                icon: "fas fa-robot",
+                color: "#667eea",
+                description: "Club des technologies avancées : ateliers IoT, compétitions nationales, projet 'Force' (IA pour le sport) lauréat à ExpoScience.",
+                members: 120,
+                achievements: ["Best Club of the Year 2025", "Best Collaboration B-TECH Competition"]
             },
             {
                 id: 2,
-                title: 'Architecture IoT et Protocoles MQTT',
-                type: 'cours',
-                formation: 'IoT',
-                level: 'L3',
-                year: 'Semestre 2',
-                description: 'Résumé de cours sur les architectures IoT, capteurs, brokers MQTT et scénarios temps réel.',
-                fileName: 'cours-iot-mqtt.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Architecture IoT\n\nModules:\n- Capteurs et microcontroleurs\n- MQTT\n- LoRaWAN\n- Monitoring des objets connectes\n')
+                name: "Club ARSII",
+                category: "🤖 Robotique & IA",
+                icon: "fas fa-microchip",
+                color: "#f5576c",
+                description: "Association Robotique et Systèmes Intelligents et Innovants. Robotique, intelligence artificielle, projets embarqués, participation aux compétitions internationales comme RoboCup.",
+                members: 85,
+                achievements: ["Participation RoboCup 2025", "Projets IA embarquée"]
             },
             {
                 id: 3,
-                title: 'Réseaux IP Avancés',
-                type: 'cours',
-                formation: 'Télécom',
-                level: 'L3',
-                year: 'Semestre 1',
-                description: 'Chapitre avancé sur l’adressage IPv6, routage dynamique et sécurisation des flux réseau.',
-                fileName: 'cours-reseaux-ip.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Reseaux IP Avances\n\nPoints cles:\n- IPv6\n- OSPF\n- BGP\n- ACL et supervision\n')
-            },
-            {
-                id: 4,
-                title: 'Cloud & Virtualisation',
-                type: 'cours',
-                formation: 'Cycle Ingénieur',
-                level: '2e année',
-                year: '2025-2026',
-                description: 'Cours ingénieur sur le cloud, Docker, orchestration et déploiement de services distribués.',
-                fileName: 'cloud-virtualisation.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Cloud et Virtualisation\n\nThemes:\n- VM et conteneurs\n- Docker\n- CI/CD\n- Introduction Kubernetes\n')
-            },
-            {
-                id: 5,
-                title: 'Examen Réseaux Mobiles 5G',
-                type: 'examens',
-                formation: 'Télécom',
-                level: 'L3',
-                year: 'Session principale 2025',
-                description: 'Sujet d’examen avec partie théorique sur la 5G et étude de cas d’optimisation radio.',
-                fileName: 'examen-5g.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Examen Reseaux Mobiles 5G\n\nParties:\n1. Architecture 5G\n2. Handover\n3. Cas pratique\n')
-            },
-            {
-                id: 6,
-                title: 'Examen Machine Learning',
-                type: 'examens',
-                formation: 'Masters',
-                level: 'M2',
-                year: 'Session contrôle 2025',
-                description: 'Sujet de mastère avec classification supervisée, validation croisée et métriques de performance.',
-                fileName: 'examen-machine-learning.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Examen Machine Learning\n\nQuestions:\n- Regression logistique\n- Arbres de decision\n- Precision, recall et F1-score\n')
-            },
-            {
-                id: 7,
-                title: 'Examen Développement Web',
-                type: 'examens',
-                formation: 'Multimédia',
-                level: 'L2',
-                year: 'Session principale 2024',
-                description: 'Épreuve pratique HTML/CSS/JS avec intégration responsive et validation de formulaire.',
-                fileName: 'examen-dev-web.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - Examen Developpement Web\n\nTravail demande:\n- Landing page responsive\n- Formulaire valide\n- Menu mobile\n')
-            },
-            {
-                id: 8,
-                title: 'PFE IoT Santé Connectée',
-                type: 'pfe',
-                formation: 'IoT',
-                level: 'PFE',
-                year: 'Promotion 2025',
-                description: 'Projet de suivi médical temps réel avec capteurs, dashboard d’alerte et API de télémétrie.',
-                fileName: 'pfe-iot-sante.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - PFE IoT Sante Connectee\n\nResume:\n- Capteurs biomedicales\n- Tableau de bord\n- Alertes automatiques\n')
-            },
-            {
-                id: 9,
-                title: 'PFE Système de Recommandation IA',
-                type: 'pfe',
-                formation: 'Masters',
-                level: 'PFE',
-                year: 'Promotion 2025',
-                description: 'Projet Data Science combinant traitement de données et moteur de recommandation personnalisé.',
-                fileName: 'pfe-recommandation-ia.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - PFE Systeme de Recommandation IA\n\nResume:\n- Nettoyage de donnees\n- Collaborative filtering\n- Tableau d evaluation\n')
-            },
-            {
-                id: 10,
-                title: 'PFE Sécurisation d’un Réseau 5G',
-                type: 'pfe',
-                formation: 'Cycle Ingénieur',
-                level: 'PFE',
-                year: 'Promotion 2026',
-                description: 'Travail de fin d’études sur la sécurité des réseaux 5G, segmentation et détection d’intrusion.',
-                fileName: 'pfe-securisation-5g.txt',
-                fileUrl: buildDownloadUrl('ISITCOM - PFE Securisation 5G\n\nAxes:\n- Zero Trust\n- IDS/IPS\n- Segmentation reseau\n')
+                name: "Club Culturel ISITCOM",
+                category: "🎬 Culture & Cinéma",
+                icon: "fas fa-film",
+                color: "#38f9d7",
+                description: "Projections de films, courts-métrages ('Saïr', 'The Bus'), rencontres avec des réalisateurs et échanges inter-établissements avec l'École ISIS.",
+                members: 65,
+                achievements: ["2 films produits", "Rencontres avec réalisateurs"]
             }
         ];
 
+        // Actualités des clubs
+        const clubNews = [
+            { id: 1, club: "ATAST", title: "Victoire à la B-TECH Competition 2025", date: "26 mars 2025", content: "L'équipe ATAST remporte le prix 'Best Club of the Year' et 'Best Collaboration'." },
+            { id: 2, club: "ARSII", title: "Participation à RoboCup 2025", date: "15 mars 2025", content: "L'équipe ARSII représentera la Tunisie à la compétition internationale de robotique." },
+            { id: 3, club: "Club Culturel", title: "Projection du court-métrage 'Saïr'", date: "10 mars 2025", content: "Projection en avant-première du court-métrage réalisé par les étudiants de l'ISITCOM." }
+        ];
+
+        // Données des cours
+        const courses = [
+            { id: 1, title: 'Développement Front-End React', formation: 'Multimédia', teacher: 'Dr. Ben Ali', fileUrl: '#' },
+            { id: 2, title: 'Architecture IoT et Protocoles MQTT', formation: 'IoT', teacher: 'Pr. Mansouri', fileUrl: '#' },
+            { id: 3, title: 'Réseaux IP Avancés', formation: 'Télécom', teacher: 'Dr. Khelil', fileUrl: '#' },
+            { id: 4, title: 'Cloud & Virtualisation', formation: 'Cycle Ingénieur', teacher: 'Pr. Hamdi', fileUrl: '#' },
+            { id: 5, title: 'Machine Learning', formation: 'Masters', teacher: 'Dr. Chaabane', fileUrl: '#' }
+        ];
+
+        // Données des ressources
+        const resources = [
+            { id: 1, title: 'Cours React', type: 'cours', formation: 'Multimédia', description: 'Supports de cours React et exercices', fileUrl: '#' },
+            { id: 2, title: 'Examen IoT 2025', type: 'examens', formation: 'IoT', description: 'Sujet examen IoT avec corrigé', fileUrl: '#' },
+            { id: 3, title: 'PFE Sécurité 5G', type: 'pfe', formation: 'Télécom', description: 'Rapport PFE cybersécurité', fileUrl: '#' },
+            { id: 4, title: 'Cours Cloud', type: 'cours', formation: 'Cycle Ingénieur', description: 'Introduction au cloud computing', fileUrl: '#' },
+            { id: 5, title: 'Examen IA', type: 'examens', formation: 'Masters', description: 'Examen intelligence artificielle', fileUrl: '#' }
+        ];
+
+        // Données des événements
         const events = [
-            {
-                id: 101,
-                title: 'Nuit de l’Info ISITCOM',
-                date: '2026-11-15',
-                location: 'Campus ISITCOM - Grand amphithéâtre',
-                organizer: 'IEEE ISITCOM & ATAST',
-                description: 'Hackathon national de 24h avec coaching, mini challenges et remise de prix pour les meilleures équipes.',
-                capacity: 180,
-                registeredCount: 124
-            },
-            {
-                id: 102,
-                title: 'Journée Portes Ouvertes',
-                date: '2026-03-28',
-                location: 'Hall principal',
-                organizer: 'Administration ISITCOM',
-                description: 'Découverte des filières, laboratoires et clubs avec visites guidées et rencontres avec les enseignants.',
-                capacity: 220,
-                registeredCount: 138
-            },
-            {
-                id: 103,
-                title: 'Conférence IA & Smart Cities',
-                date: '2026-04-05',
-                location: 'Salle LabTIC',
-                organizer: 'LabTIC & ARSII',
-                description: 'Conférence thématique sur l’IA appliquée aux villes intelligentes avec experts académiques et industriels.',
-                capacity: 120,
-                registeredCount: 84
-            },
-            {
-                id: 104,
-                title: 'Forum Stage & Carrière',
-                date: '2026-04-23',
-                location: 'Espace entreprises',
-                organizer: 'Cellule carrière ISITCOM',
-                description: 'Rencontres avec les entreprises partenaires, offres de stages PFE et ateliers CV/LinkedIn.',
-                capacity: 150,
-                registeredCount: 65
-            },
-            {
-                id: 105,
-                title: 'Soutenances PFE 2026',
-                date: '2026-05-20',
-                location: 'Bloc laboratoires',
-                organizer: 'Direction des études',
-                description: 'Présentation des projets de fin d’études du cycle ingénieur et des mastères devant jury et invités.',
-                capacity: 100,
-                registeredCount: 92
-            }
+            { id: 1, title: 'Nuit de l\'Info', date: '2026-11-15', location: 'Amphi A', organizer: 'ATAST', description: 'Hackathon 24h', capacity: 100, registeredCount: 45 },
+            { id: 2, title: 'Journée Portes Ouvertes', date: '2026-03-28', location: 'Hall principal', organizer: 'ISITCOM', description: 'Découverte des formations', capacity: 200, registeredCount: 120 },
+            { id: 3, title: 'Conférence IA', date: '2026-04-05', location: 'LabTIC', organizer: 'ARSII', description: 'IA et Smart Cities', capacity: 80, registeredCount: 50 }
         ];
 
         // Mobile menu
@@ -1710,371 +1150,150 @@
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
         window.onclick = function(e) { if (e.target == document.getElementById('modal')) closeModal(); };
 
-        const resourceSearch = document.getElementById('resourceSearch');
-        const resourceTypeFilter = document.getElementById('resourceTypeFilter');
-        const resourceFormationFilter = document.getElementById('resourceFormationFilter');
-        const resourceGrid = document.getElementById('resourceGrid');
-        const resourceCount = document.getElementById('resourceCount');
-        const resourceReset = document.getElementById('resourceReset');
-        const eventList = document.getElementById('eventList');
-        const eventCount = document.getElementById('eventCount');
-        const openSeats = document.getElementById('openSeats');
-        const registrationCount = document.getElementById('registrationCount');
-        let observer;
-
-        function observeAnimatedElements() {
-            if (!observer) return;
-            document.querySelectorAll('.section, .card, .resource-card, .event-list-card, .calendar-card, .event-panel').forEach((el) => {
-                if (el.dataset.observed === 'true') return;
-                el.dataset.observed = 'true';
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'all 0.6s';
-                observer.observe(el);
-            });
-        }
-
-        function getStoredRegistrations() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            } catch (error) {
-                return [];
-            }
-        }
-
-        let registrations = getStoredRegistrations();
-
-        function saveRegistrations() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(registrations));
-        }
-
-        function normalizeText(value) {
-            return value
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '');
-        }
-
-        function getTypeLabel(type) {
-            const labels = {
-                cours: 'Cours',
-                examens: 'Examens',
-                pfe: 'PFE'
-            };
-            return labels[type] || type;
-        }
-
-        function getTypeIcon(type) {
-            const icons = {
-                cours: 'fa-book-open',
-                examens: 'fa-file-lines',
-                pfe: 'fa-graduation-cap'
-            };
-            return icons[type] || 'fa-file';
-        }
-
-        function formatEventDate(dateString) {
-            return new Date(dateString).toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-        }
-
-        function getEventRegistrations(eventId) {
-            return registrations.filter((registration) => registration.eventId === eventId);
-        }
-
-        function isRegistered(eventId, email) {
-            return registrations.some(
-                (registration) =>
-                    registration.eventId === eventId &&
-                    registration.email.toLowerCase() === email.toLowerCase()
-            );
-        }
-
-        function getRemainingSeats(event) {
-            return event.capacity - event.registeredCount - getEventRegistrations(event.id).length;
-        }
-
-        function renderResources() {
-            const searchValue = normalizeText(resourceSearch.value.trim());
-            const typeValue = resourceTypeFilter.value;
-            const formationValue = resourceFormationFilter.value;
-
-            const filteredResources = resources.filter((resource) => {
-                const matchesSearch =
-                    !searchValue ||
-                    normalizeText(`${resource.title} ${resource.description} ${resource.formation} ${resource.year}`).includes(searchValue);
-                const matchesType = typeValue === 'all' || resource.type === typeValue;
-                const matchesFormation = formationValue === 'all' || resource.formation === formationValue;
-
-                return matchesSearch && matchesType && matchesFormation;
-            });
-
-            resourceCount.textContent = filteredResources.length;
-
-            if (!filteredResources.length) {
-                resourceGrid.innerHTML = `
-                    <div class="resource-empty">
-                        <h3>Aucune ressource trouvée</h3>
-                        <p>Essayez une autre combinaison de filtres ou réinitialisez la recherche.</p>
+        // Rendu des clubs
+        function renderClubs() {
+            const clubsGrid = document.getElementById('clubsGrid');
+            clubsGrid.innerHTML = clubs.map(club => `
+                <div class="card" onclick="showClubInfo('${club.name}')">
+                    <div class="card-img" style="background: linear-gradient(135deg, ${club.color}20, ${club.color}40);">
+                        <i class="${club.icon} fa-4x" style="color:${club.color};"></i>
                     </div>
-                `;
+                    <div class="card-content">
+                        <span class="club-badge">${club.category}</span>
+                        <h3>${club.name}</h3>
+                        <p>${club.description}</p>
+                        <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span style="background:#eef8f9; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.7rem;"><i class="fas fa-users"></i> ${club.members} membres</span>
+                            ${club.achievements.map(a => `<span style="background:#eef8f9; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.7rem;"><i class="fas fa-trophy"></i> ${a}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Rendu des actualités des clubs
+        function renderClubNews() {
+            const newsFeed = document.getElementById('clubNewsFeed');
+            newsFeed.innerHTML = clubNews.map(news => `
+                <div class="resource-card">
+                    <div class="resource-card-top">
+                        <span class="resource-card-icon"><i class="fas fa-newspaper"></i></span>
+                        <span class="resource-tag">${news.club}</span>
+                    </div>
+                    <h3>${news.title}</h3>
+                    <p>${news.content}</p>
+                    <div class="resource-meta"><span>Publié le ${news.date}</span></div>
+                </div>
+            `).join('');
+        }
+
+        // Rendu des cours
+        function renderCourses() {
+            const searchValue = document.getElementById('courseSearch').value.toLowerCase();
+            const formationValue = document.getElementById('courseFormationFilter').value;
+            
+            const filtered = courses.filter(course => {
+                const matchSearch = course.title.toLowerCase().includes(searchValue);
+                const matchFormation = formationValue === 'all' || course.formation === formationValue;
+                return matchSearch && matchFormation;
+            });
+            
+            const grid = document.getElementById('courseGrid');
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="resource-empty">Aucun cours trouvé</div>';
                 return;
             }
-
-            resourceGrid.innerHTML = filteredResources.map((resource) => `
-                <article class="resource-card">
+            
+            grid.innerHTML = filtered.map(course => `
+                <div class="resource-card">
                     <div class="resource-card-top">
-                        <span class="resource-card-icon"><i class="fas ${getTypeIcon(resource.type)}"></i></span>
-                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:flex-end;">
-                            <span class="resource-type-badge">${getTypeLabel(resource.type)}</span>
-                            <span class="resource-level-badge">${resource.level}</span>
-                        </div>
+                        <span class="resource-card-icon"><i class="fas fa-book-open"></i></span>
+                        <span class="resource-tag">${course.formation}</span>
                     </div>
-                    <div>
-                        <h3>${resource.title}</h3>
-                        <div class="resource-meta">
-                            <span>${resource.formation}</span>
-                            <span>${resource.year}</span>
-                        </div>
-                    </div>
-                    <p>${resource.description}</p>
+                    <h3>${course.title}</h3>
+                    <p>Enseignant : ${course.teacher}</p>
                     <div class="resource-actions">
-                        <small style="color:#708090;">Fichier démo prêt au téléchargement</small>
-                        <a class="resource-download" href="${resource.fileUrl}" download="${resource.fileName}">
-                            <i class="fas fa-download"></i> Télécharger
-                        </a>
+                        <a class="resource-download" href="${course.fileUrl}"><i class="fas fa-download"></i> Télécharger</a>
                     </div>
-                </article>
-            `).join('');
-            observeAnimatedElements();
-        }
-
-        function buildEventStatus(event) {
-            const remainingSeats = getRemainingSeats(event);
-            if (remainingSeats <= 0) {
-                return '<span class="status-pill full"><i class="fas fa-circle-xmark"></i> Complet</span>';
-            }
-
-            const alreadyRegistered = getEventRegistrations(event.id).length > 0;
-            if (alreadyRegistered) {
-                return '<span class="status-pill registered"><i class="fas fa-circle-check"></i> Déjà inscrit</span>';
-            }
-
-            return '<span class="status-pill open"><i class="fas fa-circle"></i> Inscriptions ouvertes</span>';
-        }
-
-        function renderEventStats() {
-            eventCount.textContent = events.length;
-            openSeats.textContent = events.reduce((total, event) => total + Math.max(getRemainingSeats(event), 0), 0);
-            registrationCount.textContent = registrations.length;
-        }
-
-        function openEventDetails(eventId) {
-            const event = events.find((item) => item.id === eventId);
-            if (!event) return;
-
-            const remainingSeats = getRemainingSeats(event);
-            const buttonDisabled = remainingSeats <= 0 ? 'disabled' : '';
-            const buttonLabel = remainingSeats <= 0 ? 'Complet' : 'S’inscrire à cet événement';
-
-            showModal(
-                event.title,
-                `
-                <div style="display:grid; gap:1rem;">
-                    <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
-                        ${buildEventStatus(event)}
-                        <span class="resource-tag">${formatEventDate(event.date)}</span>
-                    </div>
-                    <p>${event.description}</p>
-                    <div class="resource-meta">
-                        <span><i class="fas fa-location-dot"></i> ${event.location}</span>
-                        <span><i class="fas fa-users"></i> ${remainingSeats} place(s) restante(s)</span>
-                        <span><i class="fas fa-user-tie"></i> ${event.organizer}</span>
-                    </div>
-                    <button type="button" id="openRegisterModalBtn" class="event-link-btn primary" ${buttonDisabled}>${buttonLabel}</button>
                 </div>
-                `
-            );
-
-            const registerButton = document.getElementById('openRegisterModalBtn');
-            if (registerButton && remainingSeats > 0) {
-                registerButton.addEventListener('click', () => openRegistrationForm(eventId));
-            }
+            `).join('');
         }
-
+        
+        // Rendu des ressources
+        function renderResources() {
+            const grid = document.getElementById('resourceGrid');
+            grid.innerHTML = resources.map(res => `
+                <div class="resource-card">
+                    <div class="resource-card-top">
+                        <span class="resource-card-icon"><i class="fas fa-file"></i></span>
+                        <span class="resource-tag">${res.type}</span>
+                    </div>
+                    <h3>${res.title}</h3>
+                    <p>${res.description}</p>
+                    <div class="resource-actions">
+                        <a class="resource-download" href="${res.fileUrl}"><i class="fas fa-download"></i> Télécharger</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Rendu des événements
         function renderEventList() {
-            const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            eventList.innerHTML = sortedEvents.map((event) => {
+            const list = document.getElementById('eventList');
+            list.innerHTML = events.map(event => {
                 const date = new Date(event.date);
-                const day = date.toLocaleDateString('fr-FR', { day: '2-digit' });
+                const day = date.getDate();
                 const month = date.toLocaleDateString('fr-FR', { month: 'short' });
-                const remainingSeats = getRemainingSeats(event);
-
+                const remaining = event.capacity - event.registeredCount;
                 return `
-                    <article class="event-list-card">
+                    <div class="event-list-card">
                         <div class="event-card-top">
                             <div class="event-card-date">
                                 <div class="day">${day}</div>
                                 <div class="month">${month}</div>
                             </div>
-                            <div style="flex:1;">
-                                <div style="display:flex; justify-content:space-between; gap:0.8rem; flex-wrap:wrap;">
-                                    <h3>${event.title}</h3>
-                                    ${buildEventStatus(event)}
+                            <div style="flex:1">
+                                <h3>${event.title}</h3>
+                                <div class="event-card-meta">
+                                    <span>${event.location}</span>
+                                    <span>${event.organizer}</span>
                                 </div>
                                 <p>${event.description}</p>
+                                <button class="event-link-btn primary" onclick="openEventDetails(${event.id})">S'inscrire</button>
                             </div>
                         </div>
-                        <div class="event-card-meta">
-                            <span><i class="fas fa-location-dot"></i> ${event.location}</span>
-                            <span><i class="fas fa-user-group"></i> ${remainingSeats} place(s)</span>
-                            <span><i class="fas fa-building-columns"></i> ${event.organizer}</span>
-                        </div>
-                        <div class="event-card-actions">
-                            <button type="button" class="event-link-btn secondary" onclick="openEventDetails(${event.id})">Voir les détails</button>
-                            <button type="button" class="event-link-btn primary" onclick="openRegistrationForm(${event.id})" ${remainingSeats <= 0 ? 'disabled' : ''}>S’inscrire</button>
-                        </div>
-                    </article>
+                    </div>
                 `;
             }).join('');
-            observeAnimatedElements();
         }
-
-        function openRegistrationForm(eventId) {
-            const event = events.find((item) => item.id === eventId);
-            if (!event) return;
-
-            if (getRemainingSeats(event) <= 0) {
-                openEventDetails(eventId);
-                return;
-            }
-
-            const formationOptionsHtml = formationOptions
-                .map((formation) => `<option value="${formation}">${formation}</option>`)
-                .join('');
-
-            showModal(
-                `Inscription - ${event.title}`,
-                `
-                <p>Complétez ce formulaire pour réserver votre place. Les inscriptions sont stockées localement pour la démonstration Sprint 4.</p>
-                <form id="eventRegistrationForm" class="event-form-grid">
-                    <div class="form-group">
-                        <label for="eventFullName">Nom complet *</label>
-                        <input type="text" id="eventFullName" placeholder="Votre nom complet" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventEmail">Email *</label>
-                        <input type="email" id="eventEmail" placeholder="prenom.nom@isitcom.rnu.tn" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventFormation">Formation *</label>
-                        <select id="eventFormation" required>
-                            <option value="">Sélectionnez votre formation</option>
-                            ${formationOptionsHtml}
-                        </select>
-                    </div>
-                    <div id="eventRegisterFeedback" class="event-register-feedback"></div>
-                    <button type="submit" class="btn btn-submit">Confirmer l’inscription</button>
-                </form>
-                `
-            );
-
-            const registrationForm = document.getElementById('eventRegistrationForm');
-            registrationForm.addEventListener('submit', function(eventSubmit) {
-                eventSubmit.preventDefault();
-                const fullName = document.getElementById('eventFullName').value.trim();
-                const email = document.getElementById('eventEmail').value.trim();
-                const formation = document.getElementById('eventFormation').value;
-                const feedback = document.getElementById('eventRegisterFeedback');
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                feedback.className = 'event-register-feedback';
-                feedback.textContent = '';
-
-                if (!fullName || !emailRegex.test(email) || !formation) {
-                    feedback.className = 'event-register-feedback error';
-                    feedback.textContent = 'Veuillez remplir tous les champs avec des informations valides.';
-                    return;
-                }
-
-                if (isRegistered(eventId, email)) {
-                    feedback.className = 'event-register-feedback error';
-                    feedback.textContent = 'Cette adresse email est déjà inscrite à cet événement sur ce navigateur.';
-                    return;
-                }
-
-                if (getRemainingSeats(event) <= 0) {
-                    feedback.className = 'event-register-feedback error';
-                    feedback.textContent = 'Cet événement est désormais complet.';
-                    return;
-                }
-
-                registrations.push({
-                    eventId,
-                    fullName,
-                    email,
-                    formation
-                });
-                saveRegistrations();
-                renderEventStats();
-                renderEventList();
-                renderCalendar();
-
-                feedback.className = 'event-register-feedback success';
-                feedback.textContent = 'Inscription confirmée. Votre place a bien été réservée.';
-
-                setTimeout(() => {
-                    showModal(
-                        'Inscription confirmée',
-                        `Merci <strong>${fullName}</strong> !<br><br>Vous êtes inscrit à <strong>${event.title}</strong>.<br>Formation : ${formation}<br>Email : ${email}`
-                    );
-                }, 500);
-            });
+        
+        function openEventDetails(eventId) {
+            const event = events.find(e => e.id === eventId);
+            showModal(event.title, `
+                <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString('fr-FR')}</p>
+                <p><strong>Lieu :</strong> ${event.location}</p>
+                <p><strong>Organisateur :</strong> ${event.organizer}</p>
+                <p>${event.description}</p>
+                <p><strong>Places disponibles :</strong> ${event.capacity - event.registeredCount}</p>
+                <button class="btn" style="margin-top:1rem;" onclick="closeModal()">Fermer</button>
+            `);
         }
-
-        let calendar;
-
+        
         function renderCalendar() {
-            const calendarEvents = events.map((event) => ({
-                id: String(event.id),
-                title: event.title,
-                start: event.date,
-                allDay: true
-            }));
-
-            if (!calendar) {
-                calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-                    initialView: 'dayGridMonth',
-                    locale: 'fr',
-                    initialDate: '2026-04-01',
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,listMonth'
-                    },
-                    buttonText: {
-                        today: 'Aujourd’hui',
-                        month: 'Mois',
-                        list: 'Liste'
-                    },
-                    events: calendarEvents,
-                    eventClick(info) {
-                        info.jsEvent.preventDefault();
-                        openEventDetails(Number(info.event.id));
-                    }
-                });
-                calendar.render();
-            } else {
-                calendar.removeAllEvents();
-                calendar.addEventSource(calendarEvents);
-            }
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                events: events.map(e => ({ title: e.title, start: e.date })),
+                eventClick: (info) => {
+                    const event = events.find(e => e.title === info.event.title);
+                    if (event) openEventDetails(event.id);
+                }
+            });
+            calendar.render();
         }
-
-        // Formulaire
+        
+        // Formulaire inscription
         document.getElementById('studentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let isValid = true;
@@ -2106,11 +1325,11 @@
                 successMsg.style.display = 'block';
                 document.getElementById('studentForm').reset();
                 setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-                showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} pour votre inscription !<br><br>📌 Formation : ${classe}<br>📧 Un email de confirmation a été envoyé à ${email}<br><br>Bienvenue à l'ISITCOM !`);
+                showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} pour votre inscription !<br><br>📌 Formation : ${classe}<br>Bienvenue à l'ISITCOM !`);
             }
         });
         
-        // Fonctions d'affichage
+        // Fonctions d'affichage des informations
         function showLicenceDetails(licence) {
             const messages = {
                 'Multimédia': '<strong>Licence Technologies du Multimédia</strong><br><br>📚 Programme : React, Node.js, PHP, UI/UX, Graphisme 3D<br>🎯 Débouchés : Développeur full-stack, Chef de projet digital',
@@ -2119,11 +1338,11 @@
             };
             showModal(`📘 ${licence}`, messages[licence]);
         }
-
+        
         function showIngenieurInfo() {
-            showModal('🎓 Cycle Ingénieur', '<strong>Diplôme National d\'Ingénieur en Téléinformatique</strong><br><br>📅 3 ans<br>📚 Réseaux 5G, Cybersécurité, Cloud, IA, IoT<br>💼 Stage de 6 mois en entreprise<br>🌍 Partenariats internationaux');
+            showModal('🎓 Cycle Ingénieur', '<strong>Diplôme National d\'Ingénieur en Téléinformatique</strong><br><br>📅 3 ans<br>📚 Réseaux 5G, Cybersécurité, Cloud, IA, IoT<br>💼 Stage de 6 mois en entreprise');
         }
-
+        
         function showMasterInfo(master) {
             const messages = {
                 'Sécurité et Services des Réseaux': '<strong>Mastère en Cybersécurité</strong><br>Audit, cryptographie, sécurité IoT',
@@ -2132,40 +1351,50 @@
             };
             showModal(`📘 ${master}`, messages[master]);
         }
-
+        
         function showDoctoratInfo() {
             showModal('🎓 Doctorat', 'Conditions : Master recherche, projet de thèse, concours sur dossier. Laboratoires : LabTIC, LISI, CRISTAL');
         }
-
+        
         function showClubInfo(clubName) {
-            const messages = {
-                'ATAST ISITCOM': '🏆 Club des technologies avancées. Activités : IoT, hackathons, compétitions. Lauréat "Best Club of the Year" 2025.',
-                'Club ARSII': '🤖 Association Robotique et Systèmes Intelligents. Robotique, IA embarquée, compétitions RoboCup. Rejoignez l\'innovation !',
-                'Club Culturel ISITCOM': '🎬 Projections, courts-métrages, rencontres avec réalisateurs. Découvrez "Saïr" et "The Bus" !'
-            };
-            showModal(`🎭 ${clubName}`, messages[clubName] || `Merci de votre intérêt pour ${clubName} !`);
+            const club = clubs.find(c => c.name === clubName);
+            if (club) {
+                showModal(`🎭 ${club.name}`, `
+                    <p><strong>${club.category}</strong></p>
+                    <p>${club.description}</p>
+                    <p><strong>👥 Membres :</strong> ${club.members}</p>
+                    <p><strong>🏆 Réalisations :</strong> ${club.achievements.join(', ')}</p>
+                    <button class="btn" style="margin-top:1rem;" onclick="closeModal()">Fermer</button>
+                `);
+            }
         }
-
-        resourceSearch.addEventListener('input', renderResources);
-        resourceTypeFilter.addEventListener('change', renderResources);
-        resourceFormationFilter.addEventListener('change', renderResources);
-        resourceReset.addEventListener('click', () => {
-            resourceSearch.value = '';
-            resourceTypeFilter.value = 'all';
-            resourceFormationFilter.value = 'all';
-            renderResources();
+        
+        // Initialisation
+        document.getElementById('courseReset').addEventListener('click', () => {
+            document.getElementById('courseSearch').value = '';
+            document.getElementById('courseFormationFilter').value = 'all';
+            renderCourses();
         });
-
+        document.getElementById('courseSearch').addEventListener('input', renderCourses);
+        document.getElementById('courseFormationFilter').addEventListener('change', renderCourses);
+        
+        renderClubs();
+        renderClubNews();
+        renderCourses();
         renderResources();
-        renderEventStats();
         renderEventList();
         renderCalendar();
-
+        
         // Animation au scroll
-        observer = new IntersectionObserver((entries) => { 
+        const observer = new IntersectionObserver((entries) => { 
             entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } }); 
         }, { threshold: 0.1 });
-        observeAnimatedElements();
+        document.querySelectorAll('.section, .card, .resource-card, .event-list-card').forEach(el => { 
+            el.style.opacity = '0'; 
+            el.style.transform = 'translateY(20px)'; 
+            el.style.transition = 'all 0.6s'; 
+            observer.observe(el); 
+        });
     </script>
 </body>
 </html>
