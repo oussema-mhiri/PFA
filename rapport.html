@@ -170,6 +170,16 @@
             border-top: 1px solid #ddd;
         }
         
+        .diagram-image {
+            width: 100%;
+            max-width: 1000px;
+            display: block;
+            margin: 1rem auto;
+            border-radius: 12px;
+            border: 1px solid #dfe6eb;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        
         ul, ol {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
@@ -252,7 +262,7 @@
                 <p>Année Universitaire 2025-2026</p>
             </div>
             <div style="margin-top: 3rem;">
-                <p>Encadré par : Dr. [Nom de l'encadrant]</p>
+                <p>Encadré par : Dr. Amal elbehi</p>
                 <p>ISITCOM - Université de Sousse</p>
             </div>
         </div>
@@ -270,8 +280,7 @@
                 <li><a href="#section5" style="text-decoration: none; color: #003f5f;">5. Répartition des Tâches par Sprint</a></li>
                 <li><a href="#section6" style="text-decoration: none; color: #003f5f;">6. Cas d'Utilisation</a></li>
                 <li><a href="#section7" style="text-decoration: none; color: #003f5f;">7. Diagrammes de Séquence</a></li>
-                <li><a href="#section8" style="text-decoration: none; color: #003f5f;">8. Plan de Tests</a></li>
-                <li><a href="#section9" style="text-decoration: none; color: #003f5f;">9. Conclusion</a></li>
+                <li><a href="#section8" style="text-decoration: none; color: #003f5f;">8. Conclusion</a></li>
             </ul>
         </div>
         
@@ -493,73 +502,9 @@
         <!-- Section 6 -->
         <h2 id="section6">6. CAS D'UTILISATION</h2>
         
-        <h3>Diagramme des Acteurs</h3>
         <div class="card">
-            <pre style="background: #f0f0f0; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 9pt;">
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              ACTEURS                                        │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                    │
-│  │  Étudiant   │    │Responsable  │    │Administrateur│                    │
-│  │             │    │   Club      │    │             │                    │
-│  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘                    │
-│         │                  │                  │                            │
-│         └──────────────────┼──────────────────┘                            │
-│                            │                                               │
-│                            ▼                                               │
-│         ┌──────────────────────────────────────────────────────┐          │
-│         │                 SYSTÈME EDUCONNECT                   │          │
-│         ├──────────────────────────────────────────────────────┤          │
-│         │  ┌─────────────────┐  ┌─────────────────┐          │          │
-│         │  │ Module Auth     │  │ Module Clubs    │          │          │
-│         │  │ - S'inscrire    │  │ - Consulter     │          │          │
-│         │  │ - Se connecter  │  │ - Rejoindre     │          │          │
-│         │  │ - Gérer profil  │  │ - Gérer membres│          │          │
-│         │  └─────────────────┘  └─────────────────┘          │          │
-│         │                                                      │          │
-│         │  ┌─────────────────┐  ┌─────────────────┐          │          │
-│         │  │ Module Cours    │  │ Module Événements│          │          │
-│         │  │ - Consulter     │  │ - Consulter     │          │          │
-│         │  │ - Filtrer       │  │ - S'inscrire    │          │          │
-│         │  │ - Télécharger   │  │ - Publier (admin)│          │          │
-│         │  └─────────────────┘  └─────────────────┘          │          │
-│         │                                                      │          │
-│         │  ┌─────────────────┐  ┌─────────────────┐          │          │
-│         │  │ Module Ressources│  │ Module Admin    │          │          │
-│         │  │ - PFE           │  │ - Gérer users   │          │          │
-│         │  │ - Examens       │  │ - Statistiques  │          │          │
-│         │  │ - Livret        │  │ - Valider       │          │          │
-│         │  └─────────────────┘  └─────────────────┘          │          │
-│         └──────────────────────────────────────────────────────┘          │
-└─────────────────────────────────────────────────────────────────────────────┘
-            </pre>
+            <img src="usecase.png" alt="Diagramme de cas d'utilisation ISITCOM EduConnect" class="diagram-image">
         </div>
-        
-        <h3>UC-01 : S'authentifier</h3>
-        <table>
-            <tr><th style="width:150px">Acteurs</th><td>Étudiant, Responsable Club, Administrateur</td></tr>
-            <tr><th>Préconditions</th><td>Avoir un compte valide</td></tr>
-            <tr><th>Postconditions</th><td>L'utilisateur est connecté avec les droits correspondants</td></tr>
-            <tr><th>Scénario nominal</th><td>1. L'utilisateur accède à la page de connexion<br>2. Il saisit email et mot de passe<br>3. Le système vérifie les identifiants<br>4. Le système redirige vers le dashboard adapté au rôle</td></tr>
-        </table>
-        
-        <h3>UC-02 : S'inscrire à un club</h3>
-        <table>
-            <tr><th style="width:150px">Acteurs</th><td>Étudiant</td></tr>
-            <tr><th>Préconditions</th><td>Authentifié et non déjà membre du club</td></tr>
-            <tr><th>Postconditions</th><td>La demande d'inscription est enregistrée et notifiée</td></tr>
-            <tr><th>Scénario nominal</th><td>1. L'étudiant consulte la page du club<br>2. Il clique sur "Rejoindre ce club"<br>3. Le système affiche un formulaire<br>4. L'étudiant valide<br>5. Le système enregistre et notifie le responsable club</td>
-                </tr>
-            </table>
-            
-            <h3>UC-03 : Publier un événement</h3>
-            <table>
-                <tr><th style="width:150px">Acteurs</th><td>Responsable Club, Administrateur</td></tr>
-                <tr><th>Préconditions</th><td>Authentifié avec rôle permettant la publication</td></tr>
-                <tr><th>Postconditions</th><td>Un nouvel événement apparaît dans le calendrier</td></tr>
-                <tr><th>Scénario nominal</th><td>1. L'utilisateur accède au dashboard<br>2. Il clique sur "Ajouter un événement"<br>3. Il remplit les champs<br>4. Il valide<br>5. Le système enregistre l'événement</td></tr>
-            </table>
             
             <div class="page-break"></div>
             
@@ -602,25 +547,7 @@
             <div class="page-break"></div>
             
             <!-- Section 8 -->
-            <h2 id="section8">8. PLAN DE TESTS</h2>
-            
-            <table>
-                <thead><tr><th>Type de test</th><th>Objectif</th><th>Responsable</th><th>Statut</th></tr></thead>
-                <tbody>
-                    <tr><td>Tests unitaires</td><td>Valider les fonctions individuelles (Jest/PHPUnit)</td><td>M6</td><td>✅ Planifié</td></tr>
-                    <tr><td>Tests d'intégration</td><td>Vérifier l'interaction front/back</td><td>M6</td><td>✅ Planifié</td></tr>
-                    <tr><td>Tests utilisateurs</td><td>15 étudiants testent le site</td><td>M1, M2</td><td>📅 Sprint 6</td></tr>
-                    <tr><td>Tests responsives</td><td>Mobile, tablette, desktop</td><td>M3, M5</td><td>✅ Planifié</td></tr>
-                    <tr><td>Tests performance</td><td>Lighthouse > 90</td><td>M3, M6</td><td>📅 Sprint 6</td></tr>
-                    <tr><td>Tests sécurité</td><td>Injections SQL, XSS, authentification</td><td>M4, M6</td><td>📅 Sprint 5-6</td></tr>
-                    <tr><td>Tests de charge</td><td>100 utilisateurs simultanés</td><td>M6</td><td>📅 Sprint 5</td></tr>
-                </tbody>
-            </table>
-            
-            <div class="page-break"></div>
-            
-            <!-- Section 9 -->
-            <h2 id="section9">9. CONCLUSION</h2>
+            <h2 id="section8">8. CONCLUSION</h2>
             
             <div class="card">
                 <h3>✅ Réalisations prévues</h3>
@@ -647,15 +574,7 @@
                 </ul>
             </div>
             
-            <div class="card">
-                <h3>🙏 Remerciements</h3>
-                <ul>
-                    <li>Dr. [Nom de l'encadrant] pour son accompagnement</li>
-                    <li>L'administration de l'ISITCOM pour les informations</li>
-                    <li>Toute l'équipe de 6 personnes pour leur engagement</li>
-                    <li>Les étudiants testeurs pour leurs retours</li>
-                </ul>
-            </div>
+    
             
             <div class="footer-note">
                 <p><strong>ISITCOM EDUCONNECT</strong> - Projet PFA 2025-2026</p>
