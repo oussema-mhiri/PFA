@@ -21,8 +21,8 @@
             --card-bg: #ffffff;
             --border: #eef2f6;
             --header-bg: #ffffff;
-            --hero-bg: linear-gradient(105deg, #0f2b3d 0%, #1a4a6a 100%);
             --accent: #2c7da0;
+            --accent-dark: #1f6392;
             --accent-light: #e8f0fe;
             --shadow: 0 4px 20px rgba(0,0,0,0.02);
             --error: #e74c3c;
@@ -37,7 +37,6 @@
             --card-bg: #1e293b;
             --border: #334155;
             --header-bg: #1e293b;
-            --hero-bg: linear-gradient(105deg, #0a1628 0%, #0f2b3d 100%);
             --accent: #4a90e2;
             --accent-light: #2d3748;
         }
@@ -50,7 +49,7 @@
             transition: all 0.3s;
         }
 
-        /* ===== ANIMATIONS GLOBALES ===== */
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -58,6 +57,10 @@
         @keyframes slideUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes underlineExpand {
+            from { width: 0; }
+            to { width: 80px; }
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -75,18 +78,7 @@
             100% { box-shadow: 0 0 0 0 rgba(44,125,160,0); }
         }
 
-        .section, .card, .resource-card, .event-list-card {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .hero h1, .hero p, .hero .btn {
-            animation: slideUp 0.8s ease-out forwards;
-        }
-        .hero h1 { animation-delay: 0s; }
-        .hero p { animation-delay: 0.1s; }
-        .hero .btn { animation-delay: 0.2s; }
-
-        /* ===== HEADER & NAVIGATION ===== */
+        /* ===== HEADER ===== */
         header {
             background: var(--header-bg);
             position: fixed;
@@ -155,16 +147,47 @@
         }
         .theme-toggle:hover { transform: rotate(15deg); }
 
-        /* ===== HERO ===== */
+        /* ===== HERO AMÉLIORÉE ===== */
         .hero {
-            background: var(--hero-bg);
+            background: linear-gradient(105deg, rgba(15,43,61,0.85), rgba(26,74,106,0.85)), url('photo/fond.png') center/cover no-repeat;
             color: white;
-            padding: 9rem 2rem 5rem;
+            padding: 10rem 2rem 6rem;
             text-align: center;
             margin-top: 65px;
+            position: relative;
         }
-        .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
-        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 650px; margin: 0 auto 2rem; }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .hero .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+            animation: slideUp 0.8s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero .hero-underline {
+            width: 80px;
+            height: 3px;
+            background: white;
+            margin: 0 auto 1.5rem;
+            animation: underlineExpand 0.6s ease-out 0.2s forwards;
+            transform-origin: left;
+        }
+
+        .hero .btn {
+            animation: slideUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
 
         .btn {
             display: inline-block;
@@ -253,7 +276,7 @@
         .card p { font-size: 0.85rem; color: var(--text-secondary); }
 
         /* ===== BADGES ===== */
-        .badge-license, .badge-master, .badge-ing, .badge-doctorat {
+        .badge-license, .badge-master, .badge-ing, .badge-doctorat, .club-badge {
             display: inline-block;
             padding: 0.2rem 0.7rem;
             border-radius: 30px;
@@ -265,16 +288,7 @@
         .badge-master { background: #fef3e2; color: #c97e1a; }
         .badge-ing { background: #e3f0fc; color: #1f6392; }
         .badge-doctorat { background: #fee8e8; color: #bc4e4e; }
-        .club-badge {
-            display: inline-block;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-            background: var(--accent-light);
-            color: var(--accent);
-        }
+        .club-badge { background: var(--accent-light); color: var(--accent); }
 
         /* ===== GALERIE ===== */
         .gallery-grid {
@@ -297,26 +311,32 @@
         .gallery-item img:hover { transform: scale(1.08); }
 
         /* ===== FORMULAIRE INSCRIPTION AMÉLIORÉ ===== */
+        .form-card {
+            background: var(--bg-primary);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             position: relative;
         }
         .form-group label {
             font-weight: 600;
             font-size: 0.85rem;
             display: block;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
             color: var(--text-primary);
-            transition: color 0.2s;
         }
         .form-group input, .form-group select {
             width: 100%;
-            padding: 0.7rem 1rem;
+            padding: 0.8rem 1rem;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-primary);
+            border-radius: 14px;
+            background: var(--card-bg);
             color: var(--text-primary);
             transition: all 0.2s;
+            font-size: 0.9rem;
         }
         .form-group input:focus, .form-group select:focus {
             outline: none;
@@ -335,7 +355,7 @@
             background: #fee8e8;
             color: #bc4e4e;
             padding: 0.3rem 0.8rem;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 0.7rem;
             display: none;
             margin-top: 0.3rem;
@@ -343,16 +363,17 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.2rem;
         }
         .success-message {
             background: #e6f7ec;
             color: #1e7b3a;
-            padding: 0.8rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 16px;
             text-align: center;
             display: none;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
             animation: slideUp 0.4s ease-out;
         }
         .btn-submit {
@@ -360,10 +381,12 @@
             color: white;
             width: 100%;
             margin-top: 0.5rem;
+            padding: 0.9rem;
+            font-size: 1rem;
             transition: all 0.3s;
         }
         .btn-submit:hover {
-            background: #1f6392;
+            background: var(--accent-dark);
             transform: translateY(-2px);
             animation: pulse 0.4s ease;
         }
@@ -397,7 +420,6 @@
         .resource-card:hover {
             transform: translateY(-4px);
             border-color: var(--accent);
-            box-shadow: var(--shadow);
         }
         .resource-card-icon {
             width: 45px;
@@ -432,7 +454,7 @@
             transition: all 0.2s;
         }
         .resource-download:hover {
-            background: #1f6392;
+            background: var(--accent-dark);
             transform: translateX(3px);
         }
 
@@ -458,10 +480,8 @@
             padding: 0.4rem 1rem; 
             font-weight: 600; 
             cursor: pointer;
-            transition: all 0.2s;
         }
         .event-link-btn.primary { background: var(--accent); color: white; }
-        .event-link-btn.primary:hover { background: #1f6392; transform: scale(1.02); }
 
         /* ===== FOOTER ===== */
         footer {
@@ -503,15 +523,14 @@
             top: 1rem; right: 1rem;
             font-size: 1.3rem;
             cursor: pointer;
-            transition: transform 0.2s;
         }
-        .close-modal:hover { transform: scale(1.1); }
 
         @media (max-width: 800px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
-            .hero h1 { font-size: 1.8rem; }
-            .form-row, .events-shell { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .events-shell { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -534,35 +553,28 @@
     </header>
 
     <main>
+        <!-- Hero section améliorée -->
         <section id="home" class="hero">
             <h1>ISITCOM</h1>
-            <p>Institut Supérieur d'Informatique et des Technologies de Communication<br>Hammam Sousse - Université de Sousse</p>
-            <a href="#licences" class="btn">Découvrir nos formations</a>
+            <div class="hero-subtitle">Institut Supérieur d'Informatique et des Technologies de Communication<br>Hammam Sousse - Université de Sousse</div>
+            <div class="hero-underline"></div>
+            <a href="#licences" class="btn">📘 Découvrir nos formations</a>
         </section>
 
         <div class="container">
-            <!-- Section Faculté avec les nouvelles images -->
+            <!-- Section Faculté -->
             <section id="faculte" class="section">
                 <h2 class="section-title">L'ISITCOM en bref</h2>
                 <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-img"><img src="photo/fondation.png" alt="Fondation"></div>
-                        <div class="card-content"><h3>Fondation</h3><p>Créée en août 2001, 2ᵉ institution tunisienne d'enseignement des télécommunications.</p></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img"><img src="photo/chiffre en cles.jpg" alt="Chiffres clés"></div>
-                        <div class="card-content"><h3>Chiffres clés</h3><p>1 800+ étudiants • 3 licences • 1 cycle ingénieur • 6 masters • Doctorat</p></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img"><img src="photo/location.png" alt="Localisation"></div>
-                        <div class="card-content"><h3>Localisation</h3><p>Route GP1, Hammam Sousse 4011, Tunisie. LabTIC, LISI, CRISTAL.</p></div>
-                    </div>
+                    <div class="card"><div class="card-img"><img src="photo/fondation.png" alt="Fondation"></div><div class="card-content"><h3>Fondation</h3><p>Créée en août 2001, 2ᵉ institution tunisienne d'enseignement des télécommunications.</p></div></div>
+                    <div class="card"><div class="card-img"><img src="photo/chiffre en cles.jpg" alt="Chiffres clés"></div><div class="card-content"><h3>Chiffres clés</h3><p>1 800+ étudiants • 3 licences • 1 cycle ingénieur • 6 masters • Doctorat</p></div></div>
+                    <div class="card"><div class="card-img"><img src="photo/location.png" alt="Localisation"></div><div class="card-content"><h3>Localisation</h3><p>Route GP1, Hammam Sousse 4011, Tunisie. LabTIC, LISI, CRISTAL.</p></div></div>
                 </div>
                 <div style="margin-top: 2rem;">
                     <h3 style="margin-bottom: 1rem; color: var(--accent);">📸 Galerie du campus</h3>
                     <div class="gallery-grid">
-                        <div class="gallery-item"><img src="photo/face.jpg" alt="Campus ISITCOM"></div>
-                        <div class="gallery-item"><img src="photo/fac2.jpg" alt="Campus vue"></div>
+                        <div class="gallery-item"><img src="photo/face.jpg" alt="Campus"></div>
+                        <div class="gallery-item"><img src="photo/fac2.jpg" alt="Campus"></div>
                         <div class="gallery-item"><img src="photo/num.jpg" alt="Laboratoire"></div>
                     </div>
                 </div>
@@ -602,18 +614,9 @@
             <section id="masters" class="section">
                 <h2 class="section-title">Mastères</h2>
                 <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-img"><img src="photo/securite.jpg" alt="Sécurité"></div>
-                        <div class="card-content"><span class="badge-master">Professionnel</span><h3>Sécurité & Réseaux</h3><p>Cybersécurité, audit, cryptographie.</p><button class="btn btn-small" onclick="showMasterInfo('Sécurité')">Détails</button></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img"><img src="photo/web.jpg" alt="Web"></div>
-                        <div class="card-content"><span class="badge-master">Professionnel</span><h3>Web & Multimédia</h3><p>Microservices, DevOps, cloud native.</p><button class="btn btn-small" onclick="showMasterInfo('Web')">Détails</button></div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img"><img src="photo/IA.jpeg" alt="IA"></div>
-                        <div class="card-content"><span class="badge-master">Recherche</span><h3>IA & Data Science</h3><p>Machine Learning, Deep Learning, Big Data.</p><button class="btn btn-small" onclick="showMasterInfo('IA')">Détails</button></div>
-                    </div>
+                    <div class="card"><div class="card-img"><img src="photo/securite.jpg" alt="Sécurité"></div><div class="card-content"><span class="badge-master">Professionnel</span><h3>Sécurité & Réseaux</h3><p>Cybersécurité, audit, cryptographie.</p><button class="btn btn-small" onclick="showMasterInfo('Sécurité')">Détails</button></div></div>
+                    <div class="card"><div class="card-img"><img src="photo/web.jpg" alt="Web"></div><div class="card-content"><span class="badge-master">Professionnel</span><h3>Web & Multimédia</h3><p>Microservices, DevOps, cloud native.</p><button class="btn btn-small" onclick="showMasterInfo('Web')">Détails</button></div></div>
+                    <div class="card"><div class="card-img"><img src="photo/IA.jpeg" alt="IA"></div><div class="card-content"><span class="badge-master">Recherche</span><h3>IA & Data Science</h3><p>Machine Learning, Deep Learning, Big Data.</p><button class="btn btn-small" onclick="showMasterInfo('IA')">Détails</button></div></div>
                 </div>
             </section>
 
@@ -660,49 +663,52 @@
                 </div>
             </section>
 
-            <!-- Inscription améliorée -->
+            <!-- Formulaire d'inscription amélioré -->
             <section id="inscription" class="section">
                 <h2 class="section-title">Inscription étudiante</h2>
-                <div id="formSuccessMessage" class="success-message">✅ Inscription réussie ! Bienvenue à l'ISITCOM.</div>
-                <form id="studentForm">
-                    <div class="form-row">
-                        <div class="form-group" id="group-nom">
-                            <label>Nom *</label>
-                            <input id="nom" type="text" placeholder="Votre nom">
-                            <div class="error-message" id="error-nom">Le nom est requis</div>
+                <div class="form-card">
+                    <div id="formSuccessMessage" class="success-message">✅ Inscription réussie ! Bienvenue à l'ISITCOM.</div>
+                    <form id="studentForm">
+                        <div class="form-row">
+                            <div class="form-group" id="group-nom">
+                                <label>Nom complet *</label>
+                                <input id="nom" type="text" placeholder="Votre nom" autocomplete="off">
+                                <div class="error-message" id="error-nom">Le nom est requis</div>
+                            </div>
+                            <div class="form-group" id="group-prenom">
+                                <label>Prénom *</label>
+                                <input id="prenom" type="text" placeholder="Votre prénom" autocomplete="off">
+                                <div class="error-message" id="error-prenom">Le prénom est requis</div>
+                            </div>
                         </div>
-                        <div class="form-group" id="group-prenom">
-                            <label>Prénom *</label>
-                            <input id="prenom" type="text" placeholder="Votre prénom">
-                            <div class="error-message" id="error-prenom">Le prénom est requis</div>
+                        <div class="form-row">
+                            <div class="form-group" id="group-cin">
+                                <label>Numéro CIN (8 chiffres) *</label>
+                                <input id="cin" type="text" placeholder="12345678" maxlength="12" autocomplete="off">
+                                <div class="error-message" id="error-cin">Le CIN doit contenir 8 chiffres</div>
+                            </div>
+                            <div class="form-group" id="group-classe">
+                                <label>Formation *</label>
+                                <select id="classe">
+                                    <option value="">Sélectionnez votre formation</option>
+                                    <option>Licence Multimédia</option>
+                                    <option>Licence IoT</option>
+                                    <option>Licence Télécom</option>
+                                    <option>Cycle Ingénieur</option>
+                                    <option>Master</option>
+                                    <option>Doctorat</option>
+                                </select>
+                                <div class="error-message" id="error-classe">Veuillez sélectionner une formation</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group" id="group-cin">
-                            <label>CIN (8 chiffres) *</label>
-                            <input id="cin" type="text" placeholder="12345678" maxlength="12">
-                            <div class="error-message" id="error-cin">Le CIN doit contenir 8 chiffres</div>
+                        <div class="form-group" id="group-email">
+                            <label>Email institutionnel *</label>
+                            <input id="email" type="email" placeholder="prenom.nom@isitcom.rnu.tn" autocomplete="off">
+                            <div class="error-message" id="error-email">Email invalide (ex: prenom.nom@isitcom.rnu.tn)</div>
                         </div>
-                        <div class="form-group" id="group-classe">
-                            <label>Formation *</label>
-                            <select id="classe">
-                                <option value="">Sélectionnez</option>
-                                <option>Licence Multimédia</option>
-                                <option>Licence IoT</option>
-                                <option>Licence Télécom</option>
-                                <option>Cycle Ingénieur</option>
-                                <option>Master</option>
-                            </select>
-                            <div class="error-message" id="error-classe">Veuillez sélectionner une formation</div>
-                        </div>
-                    </div>
-                    <div class="form-group" id="group-email">
-                        <label>Email *</label>
-                        <input id="email" type="email" placeholder="exemple@isitcom.rnu.tn">
-                        <div class="error-message" id="error-email">Email invalide</div>
-                    </div>
-                    <button type="submit" class="btn btn-submit">S'inscrire maintenant</button>
-                </form>
+                        <button type="submit" class="btn btn-submit">📌 S'inscrire maintenant</button>
+                    </form>
+                </div>
             </section>
 
             <!-- Contact -->
@@ -730,13 +736,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
     <script>
+        // ===== THEME =====
         function toggleTheme() {
             document.body.classList.toggle('dark');
             localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
         }
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
 
-        // Clubs
+        // ===== DONNÉES CLUBS =====
         const clubs = [
             { name: "ATAST ISITCOM", category: "Technologies Avancées", img: "photo/atast.jpg", desc: "Club des technologies avancées. Ateliers IoT, hackathons, projet 'Force' (IA pour le sport). Lauréat 'Best Club of the Year' 2025.", members: 120, achievements: ["Best Club 2025", "Prix innovation IoT"] },
             { name: "ARSII", category: "Robotique & IA", img: "photo/arsii.png", desc: "Association Robotique et Systèmes Intelligents. Robotique mobile, drones, IA embarquée. Participation à RoboCup.", members: 85, achievements: ["Finaliste RoboCup 2025"] },
@@ -813,58 +820,55 @@
         function showDoctoratInfo() { showModal("Doctorat", "Conditions : Master recherche, projet de thèse, concours sur dossier."); }
         function openEventDetails(id) { let e = events.find(x => x.id === id); showModal(e.title, `${e.desc}<br><br>📅 ${e.date}<br>📍 ${e.location}<br>👥 Places restantes : ${e.capacity - e.registered}`); }
 
-        // Formulaire avec animations et validation améliorée
-        document.getElementById('studentForm').addEventListener('submit', (e) => {
+        // ===== FORMULAIRE AVEC VALIDATION EN TEMPS RÉEL =====
+        const form = document.getElementById('studentForm');
+        const nomInput = document.getElementById('nom');
+        const prenomInput = document.getElementById('prenom');
+        const cinInput = document.getElementById('cin');
+        const classeSelect = document.getElementById('classe');
+        const emailInput = document.getElementById('email');
+
+        function validateField(field, validator, errorId) {
+            const value = field.value.trim();
+            const isValid = validator(value);
+            const group = field.closest('.form-group');
+            if (!isValid) {
+                group.classList.add('error');
+                document.getElementById(errorId).style.display = 'block';
+            } else {
+                group.classList.remove('error');
+                document.getElementById(errorId).style.display = 'none';
+            }
+            return isValid;
+        }
+
+        function validateNom(value) { return value !== ''; }
+        function validatePrenom(value) { return value !== ''; }
+        function validateCin(value) { return /^\d{8}$/.test(value); }
+        function validateClasse(value) { return value !== ''; }
+        function validateEmail(value) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); }
+
+        nomInput.addEventListener('input', () => validateField(nomInput, validateNom, 'error-nom'));
+        prenomInput.addEventListener('input', () => validateField(prenomInput, validatePrenom, 'error-prenom'));
+        cinInput.addEventListener('input', () => validateField(cinInput, validateCin, 'error-cin'));
+        classeSelect.addEventListener('change', () => validateField(classeSelect, validateClasse, 'error-classe'));
+        emailInput.addEventListener('input', () => validateField(emailInput, validateEmail, 'error-email'));
+
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            let isValid = true;
+            const isNomValid = validateField(nomInput, validateNom, 'error-nom');
+            const isPrenomValid = validateField(prenomInput, validatePrenom, 'error-prenom');
+            const isCinValid = validateField(cinInput, validateCin, 'error-cin');
+            const isClasseValid = validateField(classeSelect, validateClasse, 'error-classe');
+            const isEmailValid = validateField(emailInput, validateEmail, 'error-email');
 
-            // Réinitialiser les erreurs
-            document.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
-            document.querySelectorAll('.error-message').forEach(m => m.style.display = 'none');
-
-            const nom = document.getElementById('nom').value.trim();
-            if (!nom) {
-                document.getElementById('group-nom').classList.add('error');
-                document.getElementById('error-nom').style.display = 'block';
-                isValid = false;
-            }
-
-            const prenom = document.getElementById('prenom').value.trim();
-            if (!prenom) {
-                document.getElementById('group-prenom').classList.add('error');
-                document.getElementById('error-prenom').style.display = 'block';
-                isValid = false;
-            }
-
-            const cin = document.getElementById('cin').value.trim();
-            if (!/^\d{8}$/.test(cin)) {
-                document.getElementById('group-cin').classList.add('error');
-                document.getElementById('error-cin').style.display = 'block';
-                isValid = false;
-            }
-
-            const classe = document.getElementById('classe').value;
-            if (!classe) {
-                document.getElementById('group-classe').classList.add('error');
-                document.getElementById('error-classe').style.display = 'block';
-                isValid = false;
-            }
-
-            const email = document.getElementById('email').value.trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById('group-email').classList.add('error');
-                document.getElementById('error-email').style.display = 'block';
-                isValid = false;
-            }
-
-            if (isValid) {
+            if (isNomValid && isPrenomValid && isCinValid && isClasseValid && isEmailValid) {
                 const successMsg = document.getElementById('formSuccessMessage');
                 successMsg.style.display = 'block';
-                document.getElementById('studentForm').reset();
+                form.reset();
                 setTimeout(() => successMsg.style.display = 'none', 5000);
-                showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} !<br><br>📌 Formation : ${classe}<br>📧 Un email de confirmation a été envoyé à ${email}<br><br>Bienvenue à l'ISITCOM !`);
+                showModal('✅ Inscription confirmée', `Merci ${prenomInput.value} ${nomInput.value} !<br><br>📌 Formation : ${classeSelect.value}<br>📧 Un email de confirmation a été envoyé à ${emailInput.value}<br><br>Bienvenue à l'ISITCOM !`);
             } else {
-                // Faire défiler jusqu'au premier champ en erreur
                 const firstError = document.querySelector('.form-group.error');
                 if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
