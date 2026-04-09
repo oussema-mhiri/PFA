@@ -15,18 +15,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.5;
             color: #2c3e50;
-            background: white;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
             padding: 2rem;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         
-        /* Styles pour l'impression PDF */
         @media print {
             body {
+                background: white;
                 padding: 0;
                 margin: 0;
                 font-size: 10pt;
@@ -34,73 +34,103 @@
             .page-break {
                 page-break-before: always;
             }
-            .no-break {
-                page-break-inside: avoid;
-            }
-            h1, h2, h3 {
-                page-break-after: avoid;
-            }
-            .print-header {
-                display: block;
-                text-align: center;
-                margin-bottom: 20px;
-            }
-            .print-button {
+            .print-button, .back-to-top {
                 display: none;
+            }
+            .card, .sprint-card, .role-card {
+                break-inside: avoid;
             }
         }
         
-        /* Bouton d'impression */
         .print-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #003f5f;
+            background: linear-gradient(135deg, #003f5f, #00a1ab);
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 30px;
+            border-radius: 40px;
             cursor: pointer;
             font-size: 16px;
             z-index: 1000;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
         }
         .print-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #003f5f;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
             background: #00a1ab;
         }
         
         h1 {
-            font-size: 28pt;
-            color: #003f5f;
+            font-size: 32pt;
+            background: linear-gradient(135deg, #003f5f, #00a1ab);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-align: center;
             margin-bottom: 0.5rem;
-            margin-top: 1rem;
         }
         
         h2 {
-            font-size: 18pt;
+            font-size: 22pt;
             color: #003f5f;
             border-bottom: 3px solid #00a1ab;
             padding-bottom: 0.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        h2:before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00a1ab, #003f5f);
+            border-radius: 3px;
         }
         
         h3 {
-            font-size: 14pt;
+            font-size: 16pt;
             color: #00a1ab;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.8rem;
         }
         
         h4 {
-            font-size: 12pt;
+            font-size: 13pt;
             color: #2c3e50;
-            margin-top: 0.8rem;
-            margin-bottom: 0.3rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
         
         .subtitle {
@@ -113,156 +143,262 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 9pt;
+            margin: 1.2rem 0;
+            font-size: 9.5pt;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #e0e6ed;
+            padding: 10px 12px;
             text-align: left;
             vertical-align: top;
         }
         
         th {
-            background: #003f5f;
+            background: linear-gradient(135deg, #003f5f, #005a8a);
             color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
         }
         
         .card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-left: 4px solid #00a1ab;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,63,95,0.08);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
         
         .badge {
-            background: #00a1ab;
+            background: linear-gradient(135deg, #00a1ab, #003f5f);
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+        
+        .priority-high {
+            background: #dc3545;
             color: white;
             padding: 0.2rem 0.6rem;
             border-radius: 20px;
             font-size: 0.7rem;
             display: inline-block;
-            margin-bottom: 0.5rem;
+        }
+        .priority-medium {
+            background: #fd7e14;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+        .priority-low {
+            background: #28a745;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            display: inline-block;
         }
         
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 1.5rem;
+            margin: 1.2rem 0;
         }
         
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.2rem 0;
+        }
+        
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin: 1.2rem 0;
+        }
+        
+        .role-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e0e6ed;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #00a1ab;
+        }
+        .role-card h4 {
+            color: #003f5f;
+            margin-bottom: 0.5rem;
+        }
+        .role-card .role-name {
+            font-weight: bold;
+            color: #00a1ab;
+            font-size: 1.1rem;
+        }
+        .role-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .sprint-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.8rem 0;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin: 1rem 0;
+        }
+        .sprint-card {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-radius: 20px;
+            padding: 1.2rem;
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+            border: 1px solid #e0e6ed;
+            transition: all 0.3s;
+        }
+        .sprint-card:hover {
+            transform: translateY(-5px);
+            border-color: #00a1ab;
+        }
+        .sprint-card h4 {
+            color: #003f5f;
+            margin-bottom: 0.5rem;
+        }
+        .sprint-number {
+            background: linear-gradient(135deg, #003f5f, #00a1ab);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .use-case-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #00a1ab;
+        }
+        .use-case-title {
+            font-weight: bold;
+            color: #003f5f;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .diagram-container {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.2rem 0;
+            text-align: center;
+            border: 1px solid #e0e6ed;
+            overflow-x: auto;
+        }
+        .diagram-title {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #5d6d7e;
+            text-align: center;
         }
         
         .footer-note {
-            margin-top: 2rem;
-            padding-top: 1rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
             text-align: center;
-            font-size: 8pt;
+            font-size: 9pt;
             color: #7f8c8d;
             border-top: 1px solid #ddd;
-        }
-        
-        .diagram-image {
-            width: 100%;
-            max-width: 1000px;
-            display: block;
-            margin: 1rem auto;
-            border-radius: 12px;
-            border: 1px solid #dfe6eb;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-        }
-        
-        ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        li {
-            margin: 0.3rem 0;
         }
         
         .page-break {
             page-break-before: always;
         }
         
-        .sprint-timeline {
-            display: flex;
-            justify-content: space-between;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
+        .backlog-summary {
+            background: linear-gradient(135deg, #e8f0fe, #d4e6f1);
+            border-radius: 16px;
+            padding: 1rem;
+            margin: 1rem 0;
         }
         
-        .sprint-card {
-            background: #e8f0fe;
-            border-radius: 10px;
-            padding: 0.8rem;
-            text-align: center;
-            flex: 1;
-            margin: 0 0.3rem;
-        }
-        
-        .sprint-card h4 {
-            color: #003f5f;
-            margin-bottom: 0.3rem;
-        }
-        
-        .role-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 0.8rem;
-            text-align: center;
-        }
-        
-        .role-card h4 {
-            color: #003f5f;
-            margin-bottom: 0.3rem;
-        }
-        
-        .role-card .role-name {
+        .stat-number {
+            font-size: 2rem;
             font-weight: bold;
-            color: #00a1ab;
+            color: #003f5f;
         }
         
-        @media (max-width: 800px) {
-            .grid-2, .grid-3 {
+        @media (max-width: 900px) {
+            .grid-2, .grid-3, .grid-4 {
                 grid-template-columns: 1fr;
             }
             .sprint-timeline {
                 flex-direction: column;
             }
-            .sprint-card {
-                margin: 0.5rem 0;
+            body {
+                padding: 1rem;
             }
+        }
+        
+        pre {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 8pt;
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
-    <button class="print-button" onclick="window.print();">
-        📄 Enregistrer en PDF
-    </button>
+    <button class="print-button" onclick="window.print();">📄 Enregistrer en PDF</button>
+    <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'});">⬆️ Haut</button>
     
     <div class="container">
         <!-- Page de garde -->
         <div style="text-align: center; margin: 2rem 0 4rem 0;">
             <div style="font-size: 80pt; color: #003f5f;">🎓</div>
-            <h1 style="font-size: 32pt;">ISITCOM EDUCONNECT</h1>
-            <p style="font-size: 14pt; color: #00a1ab;">Plateforme Full-Stack pour les étudiants</p>
-            <div style="margin: 2rem 0;">
+            <h1>ISITCOM EDUCONNECT</h1>
+            <p style="font-size: 16pt; color: #00a1ab; font-weight: 500;">Plateforme Full-Stack pour les étudiants</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, #f8fafc, #eef2f5); border-radius: 30px;">
                 <p><strong>Projet de Fin d'Année (PFA)</strong></p>
                 <p>Équipe de 6 personnes - Méthodologie Agile</p>
                 <p>Année Universitaire 2025-2026</p>
             </div>
-            <div style="margin-top: 3rem;">
-                <p>Encadré par : Dr. Amal elbehi</p>
+            <div style="margin-top: 2rem;">
+                <p>Encadré par : <strong>Dr. Amal elbehi</strong></p>
                 <p>ISITCOM - Université de Sousse</p>
             </div>
         </div>
@@ -272,16 +408,21 @@
         <!-- Sommaire -->
         <h2>📑 SOMMAIRE</h2>
         <div class="card">
-            <ul>
-                <li><a href="#section1" style="text-decoration: none; color: #003f5f;">1. Présentation du Projet</a></li>
-                <li><a href="#section2" style="text-decoration: none; color: #003f5f;">2. Équipe de 6 personnes - Rôles et Responsabilités</a></li>
-                <li><a href="#section3" style="text-decoration: none; color: #003f5f;">3. Organisation des Sprints (6 Sprints)</a></li>
-                <li><a href="#section4" style="text-decoration: none; color: #003f5f;">4. Product Backlog (20 User Stories)</a></li>
-                <li><a href="#section5" style="text-decoration: none; color: #003f5f;">5. Répartition des Tâches par Sprint</a></li>
-                <li><a href="#section6" style="text-decoration: none; color: #003f5f;">6. Cas d'Utilisation</a></li>
-                <li><a href="#section7" style="text-decoration: none; color: #003f5f;">7. Diagrammes de Séquence</a></li>
-                <li><a href="#section8" style="text-decoration: none; color: #003f5f;">8. Conclusion</a></li>
-            </ul>
+            <div class="grid-2">
+                <ul>
+                    <li><a href="#section1" style="text-decoration: none; color: #003f5f;">1. Présentation du Projet</a></li>
+                    <li><a href="#section2" style="text-decoration: none; color: #003f5f;">2. Équipe de 6 personnes - Rôles</a></li>
+                    <li><a href="#section3" style="text-decoration: none; color: #003f5f;">3. Organisation des Sprints (4 Sprints)</a></li>
+                    <li><a href="#section4" style="text-decoration: none; color: #003f5f;">4. Product Backlog Global</a></li>
+                    <li><a href="#section5" style="text-decoration: none; color: #003f5f;">5. Product Backlog par Sprint</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#section6" style="text-decoration: none; color: #003f5f;">6. Cas d'Utilisation</a></li>
+                    <li><a href="#section7" style="text-decoration: none; color: #003f5f;">7. Diagrammes de Séquence</a></li>
+                    <li><a href="#section8" style="text-decoration: none; color: #003f5f;">8. Répartition des Tâches</a></li>
+                    <li><a href="#section9" style="text-decoration: none; color: #003f5f;">9. Conclusion</a></li>
+                </ul>
+            </div>
         </div>
         
         <div class="page-break"></div>
@@ -289,311 +430,398 @@
         <!-- Section 1 -->
         <h2 id="section1">1. PRÉSENTATION DU PROJET</h2>
         
-        <h3>🎯 Contexte et Problématique</h3>
-        <p><strong>ISITCOM</strong> (Institut Supérieur d'Informatique et des Technologies de Communication de Hammam Sousse) forme chaque année plus de <strong>1 800 étudiants</strong>. Cependant, les informations sont dispersées :</p>
-        <ul>
-            <li>📚 Cours sur Moodle sans centralisation</li>
-            <li>🎭 Clubs manquant de visibilité</li>
-            <li>📅 Événements annoncés tardivement</li>
-            <li>📄 Anciens examens et PFE difficiles à trouver</li>
-            <li>📱 Pas d'interface mobile adaptée</li>
-        </ul>
+        <div class="grid-2">
+            <div class="card">
+                <h3>🎯 Contexte et Problématique</h3>
+                <p><strong>ISITCOM</strong> forme chaque année plus de <strong>1 800 étudiants</strong>. Problèmes :</p>
+                <ul style="margin-top: 0.8rem;">
+                    <li>📚 Cours dispersés sur Moodle</li>
+                    <li>🎭 Clubs manquant de visibilité</li>
+                    <li>📅 Événements annoncés tardivement</li>
+                    <li>📄 Anciens examens et PFE difficiles à trouver</li>
+                    <li>📱 Pas d'interface mobile adaptée</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🎯 Objectifs du projet</h3>
+                <ul>
+                    <li>✅ Plateforme web full-stack centralisée</li>
+                    <li>✅ Présentation des 3 licences et cycle ingénieur</li>
+                    <li>✅ Valorisation des clubs étudiants</li>
+                    <li>✅ Accès facile aux ressources pédagogiques</li>
+                    <li>✅ Calendrier centralisé des événements</li>
+                    <li>✅ Méthodologie Agile - équipe de 6 personnes</li>
+                </ul>
+            </div>
+        </div>
         
-        <h3>🎯 Objectifs du projet</h3>
-        <ul>
-            <li>✅ Créer une plateforme web <strong>full-stack</strong> centralisant toutes les informations</li>
-            <li>✅ Présenter les 3 licences (Multimédia, IoT, Télécom) et le cycle ingénieur</li>
-            <li>✅ Mettre en avant les clubs étudiants (ATAST, IEEE, Culturel)</li>
-            <li>✅ Fournir un accès facile aux ressources pédagogiques (cours, examens, PFE)</li>
-            <li>✅ Centraliser le calendrier des événements (Nuit de l'Info, conférences)</li>
-            <li>✅ Suivre une méthodologie <strong>Agile</strong> avec une équipe de 6 personnes</li>
-        </ul>
+        <div class="backlog-summary">
+            <div class="grid-4" style="text-align: center;">
+                <div><span class="stat-number">20</span><br>User Stories</div>
+                <div><span class="stat-number">4</span><br>Sprints</div>
+                <div><span class="stat-number">12</span><br>Semaines</div>
+                <div><span class="stat-number">6</span><br>Personnes</div>
+            </div>
+        </div>
         
         <div class="page-break"></div>
         
         <!-- Section 2 -->
-        <h2 id="section2">2. ÉQUIPE DE 6 PERSONNES - RÔLES ET RESPONSABILITÉS</h2>
+        <h2 id="section2">2. ÉQUIPE DE 6 PERSONNES - RÔLES</h2>
         
         <div class="grid-3">
-            <div class="role-card">
-                <div style="font-size: 24pt;">👨‍💼</div>
-                <h4>Scrum Master</h4>
-                <p class="role-name">Membre 1</p>
-                <p style="font-size: 8pt;">Daily meetings, résolution blocages, méthodologie agile</p>
-            </div>
-            <div class="role-card">
-                <div style="font-size: 24pt;">📋</div>
-                <h4>Product Owner</h4>
-                <p class="role-name">Membre 2</p>
-                <p style="font-size: 8pt;">Gestion du backlog, priorisation, interface encadrant</p>
-            </div>
-            <div class="role-card">
-                <div style="font-size: 24pt;">🎨</div>
-                <h4>Lead Frontend</h4>
-                <p class="role-name">Membre 3</p>
-                <p style="font-size: 8pt;">Architecture React, composants, intégration API</p>
-            </div>
-            <div class="role-card">
-                <div style="font-size: 24pt;">⚙️</div>
-                <h4>Lead Backend</h4>
-                <p class="role-name">Membre 4</p>
-                <p style="font-size: 8pt;">Architecture Laravel, API REST, sécurité, BDD</p>
-            </div>
-            <div class="role-card">
-                <div style="font-size: 24pt;">💻</div>
-                <h4>Développeur Full-Stack</h4>
-                <p class="role-name">Membre 5</p>
-                <p style="font-size: 8pt;">Implémentation frontend et backend, responsive design</p>
-            </div>
-            <div class="role-card">
-                <div style="font-size: 24pt;">🚀</div>
-                <h4>DevOps / Testeur</h4>
-                <p class="role-name">Membre 6</p>
-                <p style="font-size: 8pt;">Déploiement, CI/CD, tests, documentation</p>
-            </div>
+            <div class="role-card"><div class="role-icon">👨‍💼</div><h4>Scrum Master</h4><p class="role-name">Membre 1</p><p>Daily meetings, résolution blocages</p></div>
+            <div class="role-card"><div class="role-icon">📋</div><h4>Product Owner</h4><p class="role-name">Membre 2</p><p>Gestion du backlog, priorisation</p></div>
+            <div class="role-card"><div class="role-icon">🎨</div><h4>Lead Frontend</h4><p class="role-name">Membre 3</p><p>Architecture React, intégration API</p></div>
+            <div class="role-card"><div class="role-icon">⚙️</div><h4>Lead Backend</h4><p class="role-name">Membre 4</p><p>Architecture Laravel, API REST, BDD</p></div>
+            <div class="role-card"><div class="role-icon">💻</div><h4>Développeur Full-Stack</h4><p class="role-name">Membre 5</p><p>Frontend/Backend, responsive</p></div>
+            <div class="role-card"><div class="role-icon">🚀</div><h4>DevOps / Testeur</h4><p class="role-name">Membre 6</p><p>Déploiement, CI/CD, tests</p></div>
         </div>
         
         <div class="page-break"></div>
         
         <!-- Section 3 -->
-        <h2 id="section3">3. ORGANISATION DES SPRINTS (6 Sprints de 2 semaines)</h2>
+        <h2 id="section3">3. ORGANISATION DES SPRINTS (4 Sprints de 3 semaines)</h2>
         
         <div class="sprint-timeline">
-            <div class="sprint-card"><h4>Sprint 1</h4><p>S1-S2<br><strong>Configuration & Base</strong><br>Structure projet, BDD, auth</p></div>
-            <div class="sprint-card"><h4>Sprint 2</h4><p>S3-S4<br><strong>Pages statiques & UI</strong><br>Maquettes, responsive</p></div>
-            <div class="sprint-card"><h4>Sprint 3</h4><p>S5-S6<br><strong>Formations, Clubs & Cours</strong><br>API formations, clubs, cours</p></div>
-            <div class="sprint-card"><h4>Sprint 4</h4><p>S7-S8<br><strong>Ressources & Événements</strong><br>PFE, examens, calendrier</p></div>
-            <div class="sprint-card"><h4>Sprint 5</h4><p>S9-S10<br><strong>Dashboard Admin</strong><br>Statistiques, gestion users</p></div>
-            <div class="sprint-card"><h4>Sprint 6</h4><p>S11-S12<br><strong>Tests & Déploiement</strong><br>Optimisation, mise en ligne</p></div>
+            <div class="sprint-card"><div class="sprint-number">1</div><h4>Sprint 1</h4><p>Semaines 1-3</p><p><strong>Configuration & Base</strong><br>Structure, BDD, auth, pages statiques</p><div class="badge">5 US</div></div>
+            <div class="sprint-card"><div class="sprint-number">2</div><h4>Sprint 2</h4><p>Semaines 4-6</p><p><strong>Formations, Clubs & Cours</strong><br>API formations, clubs, cours</p><div class="badge">6 US</div></div>
+            <div class="sprint-card"><div class="sprint-number">3</div><h4>Sprint 3</h4><p>Semaines 7-9</p><p><strong>Ressources & Événements</strong><br>PFE, examens, calendrier, admin</p><div class="badge">6 US</div></div>
+            <div class="sprint-card"><div class="sprint-number">4</div><h4>Sprint 4</h4><p>Semaines 10-12</p><p><strong>Tests & Déploiement</strong><br>Optimisation, déploiement</p><div class="badge">3 US</div></div>
         </div>
         
         <div class="page-break"></div>
         
-        <!-- Section 4 -->
-        <h2 id="section4">4. PRODUCT BACKLOG (20 User Stories)</h2>
+        <!-- Section 4 - Product Backlog Global -->
+        <h2 id="section4">4. PRODUCT BACKLOG GLOBAL</h2>
         
         <table>
-            <thead>
-                <tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th><th>Sprint</th><th>Rôles</th></tr>
-            </thead>
+            <thead><tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th><th>Sprint</th><th>Rôles</th></tr></thead>
             <tbody>
-                <tr><td>US-01</td><td>En tant qu'étudiant, je veux créer un compte et me connecter</td><td>Haute</td><td>5</td><td>1</td><td>M4,M6 + M3,M5</td></tr>
-                <tr><td>US-02</td><td>En tant qu'étudiant, je veux consulter la présentation ISITCOM et ses 3 licences</td><td>Haute</td><td>3</td><td>2</td><td>M3,M5</td></tr>
-                <tr><td>US-03</td><td>En tant qu'étudiant, je veux voir la liste des clubs et leurs détails</td><td>Haute</td><td>5</td><td>3</td><td>M3,M4</td></tr>
-                <tr><td>US-04</td><td>En tant qu'étudiant, je veux m'inscrire à un club</td><td>Haute</td><td>5</td><td>3</td><td>M4,M6 + M3,M5</td></tr>
-                <tr><td>US-05</td><td>En tant qu'étudiant, je veux accéder aux cours par filière</td><td>Haute</td><td>8</td><td>3</td><td>Équipe</td></tr>
-                <tr><td>US-06</td><td>En tant qu'étudiant, je veux télécharger des documents</td><td>Haute</td><td>5</td><td>4</td><td>M4,M6</td></tr>
-                <tr><td>US-07</td><td>En tant qu'étudiant, je veux consulter le calendrier des événements</td><td>Haute</td><td>5</td><td>4</td><td>M3,M5</td></tr>
-                <tr><td>US-08</td><td>En tant qu'étudiant, je veux m'inscrire aux événements</td><td>Moyenne</td><td>5</td><td>4</td><td>M4,M6</td></tr>
-                <tr><td>US-09</td><td>En tant que responsable club, je veux gérer les membres</td><td>Haute</td><td>5</td><td>3</td><td>M4,M6</td></tr>
-                <tr><td>US-10</td><td>En tant que responsable club, je veux publier des actualités</td><td>Moyenne</td><td>5</td><td>4</td><td>M3,M4</td></tr>
-                <tr><td>US-11</td><td>En tant qu'administrateur, je veux gérer tous les utilisateurs</td><td>Haute</td><td>8</td><td>5</td><td>M4,M6</td></tr>
-                <tr><td>US-12</td><td>En tant qu'administrateur, je veux gérer les formations</td><td>Haute</td><td>5</td><td>3</td><td>M4,M6</td></tr>
-                <tr><td>US-13</td><td>En tant qu'administrateur, je veux valider les inscriptions clubs</td><td>Moyenne</td><td>3</td><td>3</td><td>M4</td></tr>
-                <tr><td>US-14</td><td>En tant qu'administrateur, je veux consulter des statistiques</td><td>Moyenne</td><td>8</td><td>5</td><td>M6</td></tr>
-                <tr><td>US-15</td><td>En tant qu'étudiant, je veux recevoir des notifications</td><td>Basse</td><td>5</td><td>5</td><td>M4</td></tr>
-                <tr><td>US-16</td><td>En tant qu'étudiant, je veux rechercher des cours</td><td>Basse</td><td>5</td><td>6</td><td>M3,M5</td></tr>
-                <tr><td>US-17</td><td>En tant qu'étudiant, je veux télécharger le livret étudiant</td><td>Basse</td><td>2</td><td>4</td><td>M5</td></tr>
-                <tr><td>US-18</td><td>En tant qu'étudiant, je veux voir les anciens rapports PFE</td><td>Moyenne</td><td>5</td><td>4</td><td>M3,M4</td></tr>
-                <tr><td>US-19</td><td>En tant qu'étudiant, je veux utiliser le site sur mobile</td><td>Haute</td><td>5</td><td>2</td><td>M3,M5</td></tr>
-                <tr><td>US-20</td><td>En tant qu'utilisateur, je veux contacter l'administration</td><td>Basse</td><td>3</td><td>6</td><td>M6</td></tr>
+                <tr><td>US-01</td><td>En tant qu'étudiant, je veux créer un compte et me connecter</td><td><span class="priority-high">Haute</span></td><td>5</td><td>1</td><td>M4,M6+M3,M5</td></tr>
+                <tr><td>US-02</td><td>En tant qu'étudiant, je veux consulter la présentation ISITCOM et ses 3 licences</td><td><span class="priority-high">Haute</span></td><td>3</td><td>1</td><td>M3,M5</td></tr>
+                <tr><td>US-03</td><td>En tant qu'étudiant, je veux voir la liste des clubs et leurs détails</td><td><span class="priority-high">Haute</span></td><td>5</td><td>2</td><td>M3,M4</td></tr>
+                <tr><td>US-04</td><td>En tant qu'étudiant, je veux m'inscrire à un club</td><td><span class="priority-high">Haute</span></td><td>5</td><td>2</td><td>M4,M6+M3,M5</td></tr>
+                <tr><td>US-05</td><td>En tant qu'étudiant, je veux accéder aux cours par filière</td><td><span class="priority-high">Haute</span></td><td>8</td><td>2</td><td>Équipe</td></tr>
+                <tr><td>US-06</td><td>En tant qu'étudiant, je veux télécharger des documents</td><td><span class="priority-high">Haute</span></td><td>5</td><td>3</td><td>M4,M6</td></tr>
+                <tr><td>US-07</td><td>En tant qu'étudiant, je veux consulter le calendrier des événements</td><td><span class="priority-high">Haute</span></td><td>5</td><td>3</td><td>M3,M5</td></tr>
+                <tr><td>US-08</td><td>En tant qu'étudiant, je veux m'inscrire aux événements</td><td><span class="priority-medium">Moyenne</span></td><td>5</td><td>3</td><td>M4,M6</td></tr>
+                <tr><td>US-09</td><td>En tant que responsable club, je veux gérer les membres</td><td><span class="priority-high">Haute</span></td><td>5</td><td>2</td><td>M4,M6</td></tr>
+                <tr><td>US-10</td><td>En tant que responsable club, je veux publier des actualités</td><td><span class="priority-medium">Moyenne</span></td><td>5</td><td>3</td><td>M3,M4</td></tr>
+                <tr><td>US-11</td><td>En tant qu'administrateur, je veux gérer tous les utilisateurs</td><td><span class="priority-high">Haute</span></td><td>8</td><td>3</td><td>M4,M6</td></tr>
+                <tr><td>US-12</td><td>En tant qu'administrateur, je veux gérer les formations</td><td><span class="priority-high">Haute</span></td><td>5</td><td>2</td><td>M4,M6</td></tr>
+                <tr><td>US-13</td><td>En tant qu'administrateur, je veux valider les inscriptions clubs</td><td><span class="priority-medium">Moyenne</span></td><td>3</td><td>2</td><td>M4</td></tr>
+                <tr><td>US-14</td><td>En tant qu'administrateur, je veux consulter des statistiques</td><td><span class="priority-medium">Moyenne</span></td><td>8</td><td>3</td><td>M6</td></tr>
+                <tr><td>US-15</td><td>En tant qu'étudiant, je veux recevoir des notifications</td><td><span class="priority-low">Basse</span></td><td>5</td><td>4</td><td>M4</td></tr>
+                <tr><td>US-16</td><td>En tant qu'étudiant, je veux rechercher des cours</td><td><span class="priority-low">Basse</span></td><td>5</td><td>4</td><td>M3,M5</td></tr>
+                <tr><td>US-17</td><td>En tant qu'étudiant, je veux télécharger le livret étudiant</td><td><span class="priority-low">Basse</span></td><td>2</td><td>3</td><td>M5</td></tr>
+                <tr><td>US-18</td><td>En tant qu'étudiant, je veux voir les anciens rapports PFE</td><td><span class="priority-medium">Moyenne</span></td><td>5</td><td>3</td><td>M3,M4</td></tr>
+                <tr><td>US-19</td><td>En tant qu'étudiant, je veux utiliser le site sur mobile</td><td><span class="priority-high">Haute</span></td><td>5</td><td>1</td><td>M3,M5</td></tr>
+                <tr><td>US-20</td><td>En tant qu'utilisateur, je veux contacter l'administration</td><td><span class="priority-low">Basse</span></td><td>3</td><td>4</td><td>M6</td></tr>
             </tbody>
         </table>
         
         <div class="page-break"></div>
         
-        <!-- Section 5 -->
-        <h2 id="section5">5. RÉPARTITION DES TÂCHES PAR SPRINT</h2>
-        
-        <h3>Sprint 1 (Semaines 1-2) : Configuration & Base technique</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>Mise en place du repository GitHub (branches, protection)</td><td>M6</td><td>4h</td></tr>
-                <tr><td>Configuration du projet Laravel</td><td>M4</td><td>4h</td></tr>
-                <tr><td>Configuration du projet React + Vite</td><td>M3</td><td>4h</td></tr>
-                <tr><td>Modélisation de la base de données (diagramme UML)</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>Création des migrations et modèles (users, roles)</td><td>M4</td><td>8h</td></tr>
-                <tr><td>Mise en place de l'authentification (JWT/Sanctum)</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>Création des pages de base (layout, routing React)</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Configuration Docker pour l'environnement de dev</td><td>M6</td><td>4h</td></tr>
-                <tr><td>Daily meetings et coordination</td><td>M1</td><td>2h/jour</td></tr>
-            </tbody>
-        </table>
-        
-        <h3>Sprint 2 (Semaines 3-4) : Pages statiques & UI</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>Intégration des maquettes Figma</td><td>M3, M5</td><td>12h</td></tr>
-                <tr><td>Page d'accueil (héro, présentation)</td><td>M5</td><td>6h</td></tr>
-                <tr><td>Page Faculté (histoire, chiffres, photos)</td><td>M5</td><td>6h</td></tr>
-                <tr><td>Page Licences (3 licences détaillées)</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Responsive design (mobile, tablette)</td><td>M3</td><td>8h</td></tr>
-                <tr><td>Composants réutilisables (Card, Button, Modal)</td><td>M3</td><td>6h</td></tr>
-                <tr><td>Navigation et routing React Router</td><td>M3</td><td>4h</td></tr>
-                <tr><td>Tests UI sur différents navigateurs</td><td>M6</td><td>4h</td></tr>
-            </tbody>
-        </table>
-        
-        <h3>Sprint 3 (Semaines 5-6) : Formations, Clubs & Cours</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>API CRUD pour les formations (licences)</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>API CRUD pour les clubs</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>API CRUD pour les cours</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>API pour les inscriptions aux clubs</td><td>M4, M5</td><td>6h</td></tr>
-                <tr><td>Dashboard responsable club</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>Page liste des clubs et page détail</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Page listant les cours par licence</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Intégration des API côté frontend (Axios)</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Tests d'intégration</td><td>M6</td><td>4h</td></tr>
-            </tbody>
-        </table>
-        
-        <h3>Sprint 4 (Semaines 7-8) : Ressources & Événements</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>API CRUD pour les ressources (cours, examens, PFE)</td><td>M4, M5</td><td>10h</td></tr>
-                <tr><td>Système d'upload de fichiers</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>API CRUD pour les événements</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>Page ressources avec filtres</td><td>M3, M5</td><td>8h</td></tr>
-                <tr><td>Système de téléchargement</td><td>M3, M5</td><td>4h</td></tr>
-                <tr><td>Calendrier interactif (FullCalendar)</td><td>M3</td><td>8h</td></tr>
-                <tr><td>Page événements avec calendrier</td><td>M3, M5</td><td>6h</td></tr>
-                <tr><td>Inscription aux événements</td><td>M4, M5</td><td>6h</td></tr>
-                <tr><td>Tests de sécurité</td><td>M6</td><td>4h</td></tr>
-            </tbody>
-        </table>
-        
-        <h3>Sprint 5 (Semaines 9-10) : Dashboard Admin</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>Dashboard admin complet</td><td>M3, M5</td><td>10h</td></tr>
-                <tr><td>Graphiques (Chart.js) : inscriptions, téléchargements</td><td>M3</td><td>8h</td></tr>
-                <tr><td>Gestion des utilisateurs (CRUD)</td><td>M4, M5</td><td>8h</td></tr>
-                <tr><td>Gestion des rôles et permissions</td><td>M4</td><td>6h</td></tr>
-                <tr><td>Système de notifications (email)</td><td>M4</td><td>8h</td></tr>
-                <tr><td>Tests de charge</td><td>M6</td><td>6h</td></tr>
-            </tbody>
-        </table>
-        
-        <h3>Sprint 6 (Semaines 11-12) : Tests & Déploiement</h3>
-        <table>
-            <thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
-            <tbody>
-                <tr><td>Tests utilisateurs (15 étudiants)</td><td>M1, M2</td><td>8h</td></tr>
-                <tr><td>Correction des bugs critiques</td><td>Équipe</td><td>12h</td></tr>
-                <tr><td>Optimisation SEO (metatags, sitemap)</td><td>M3</td><td>4h</td></tr>
-                <tr><td>Optimisation performance (Lighthouse > 90)</td><td>M3, M6</td><td>8h</td></tr>
-                <tr><td>Sécurisation (HTTPS, headers)</td><td>M4, M6</td><td>4h</td></tr>
-                <tr><td>Déploiement frontend (Vercel)</td><td>M6</td><td>2h</td></tr>
-                <tr><td>Déploiement backend (Heroku)</td><td>M6</td><td>2h</td></tr>
-                <tr><td>Documentation technique et utilisateur</td><td>M2, M6</td><td>8h</td></tr>
-                <tr><td>Préparation de la soutenance</td><td>M1, M2</td><td>8h</td></tr>
-            </tbody>
-        </table>
-        
-        <div class="page-break"></div>
-        
-        <!-- Section 6 -->
-        <h2 id="section6">6. CAS D'UTILISATION</h2>
+        <!-- Section 5 - Product Backlog par Sprint -->
+        <h2 id="section5">5. PRODUCT BACKLOG PAR SPRINT</h2>
         
         <div class="card">
-            <img src="usecase.png" alt="Diagramme de cas d'utilisation ISITCOM EduConnect" class="diagram-image">
+            <h3>🏃‍♂️ Sprint 1 : Configuration & Base technique</h3>
+            <p><strong>Objectif :</strong> Mettre en place l'infrastructure technique de base.</p>
+            <table><thead><tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th></tr></thead>
+            <tbody><tr><td>US-01</td><td>Créer un compte et se connecter</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+            <tr><td>US-02</td><td>Consulter la présentation ISITCOM et ses 3 licences</td><td><span class="priority-high">Haute</span></td><td>3</td></tr>
+            <tr><td>US-19</td><td>Utiliser le site sur mobile</td><td><span class="priority-high">Haute</span></td><td>5</td></tr></tbody>
+            </table>
+            <p><strong>Livrables :</strong> Architecture projet, authentification, pages statiques responsive.</p>
         </div>
-            
-            <div class="page-break"></div>
-            
-            <!-- Section 7 -->
-            <h2 id="section7">7. DIAGRAMME DE SÉQUENCE (Inscription Club)</h2>
-            
-            <div class="card">
-                <pre style="background: #f0f0f0; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 8pt;">
-    ┌────────┐      ┌──────────┐      ┌──────────┐      ┌──────────┐
-    │Étudiant│      │ Frontend │      │ Backend  │      │   Email  │
-    └───┬────┘      └────┬─────┘      └────┬─────┘      └────┬─────┘
-        │                │                 │                 │
-        │ Clique "Rejoindre"               │                 │
-        │───────────────>│                 │                 │
-        │                │                 │                 │
-        │ Affiche formulaire               │                 │
-        │<───────────────│                 │                 │
-        │                │                 │                 │
-        │ Remplit et valide                │                 │
-        │───────────────>│                 │                 │
-        │                │                 │                 │
-        │                │ POST /api/clubs/{id}/join         │
-        │                │────────────────>│                 │
-        │                │                 │                 │
-        │                │                 │ Vérifie droits  │
-        │                │                 │ Enregistre demande
-        │                │                 │                 │
-        │                │                 │ Envoie email    │
-        │                │                 │────────────────>│
-        │                │                 │                 │
-        │                │     Réponse 200 │                 │
-        │                │<────────────────│                 │
-        │                │                 │                 │
-        │ Confirmation   │                 │                 │
-        │<───────────────│                 │                 │
-        │                │                 │                 │
-                </pre>
-            </div>
-            
-            <div class="page-break"></div>
-            
-            <!-- Section 8 -->
-            <h2 id="section8">8. CONCLUSION</h2>
-            
+        
+        <div class="card">
+            <h3>🏃‍♂️ Sprint 2 : Formations, Clubs & Cours</h3>
+            <p><strong>Objectif :</strong> Développer les fonctionnalités centrales.</p>
+            <table><thead><tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th></tr></thead>
+            <tbody>
+                <tr><td>US-03</td><td>Voir la liste des clubs et leurs détails</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-04</td><td>S'inscrire à un club</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-05</td><td>Accéder aux cours par filière</td><td><span class="priority-high">Haute</span></td><td>8</td></tr>
+                <tr><td>US-09</td><td>Gérer les membres (Responsable club)</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-12</td><td>Gérer les formations (Admin)</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-13</td><td>Valider les inscriptions clubs (Admin)</td><td><span class="priority-medium">Moyenne</span></td><td>3</td></tr>
+            </tbody>
+            </table>
+            <p><strong>Livrables :</strong> API formations, clubs, cours; dashboard responsable club.</p>
+        </div>
+        
+        <div class="card">
+            <h3>🏃‍♂️ Sprint 3 : Ressources, Événements & Dashboard Admin</h3>
+            <p><strong>Objectif :</strong> Ajouter les ressources pédagogiques et l'administration.</p>
+            <table><thead><tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th></tr></thead>
+            <tbody>
+                <tr><td>US-06</td><td>Télécharger des documents</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-07</td><td>Consulter le calendrier des événements</td><td><span class="priority-high">Haute</span></td><td>5</td></tr>
+                <tr><td>US-08</td><td>S'inscrire aux événements</td><td><span class="priority-medium">Moyenne</span></td><td>5</td></tr>
+                <tr><td>US-10</td><td>Publier des actualités (Responsable club)</td><td><span class="priority-medium">Moyenne</span></td><td>5</td></tr>
+                <tr><td>US-11</td><td>Gérer tous les utilisateurs (Admin)</td><td><span class="priority-high">Haute</span></td><td>8</td></tr>
+                <tr><td>US-14</td><td>Consulter des statistiques (Admin)</td><td><span class="priority-medium">Moyenne</span></td><td>8</td></tr>
+                <tr><td>US-17</td><td>Télécharger le livret étudiant</td><td><span class="priority-low">Basse</span></td><td>2</td></tr>
+                <tr><td>US-18</td><td>Voir les anciens rapports PFE</td><td><span class="priority-medium">Moyenne</span></td><td>5</td></tr>
+            </tbody>
+            </table>
+            <p><strong>Livrables :</strong> Gestion ressources, calendrier, dashboard admin avec graphiques.</p>
+        </div>
+        
+        <div class="card">
+            <h3>🏃‍♂️ Sprint 4 : Tests, Optimisation & Déploiement</h3>
+            <p><strong>Objectif :</strong> Finaliser et déployer l'application.</p>
+            <table><thead><tr><th>ID</th><th>User Story</th><th>Priorité</th><th>SP</th></tr></thead>
+            <tbody>
+                <tr><td>US-15</td><td>Recevoir des notifications</td><td><span class="priority-low">Basse</span></td><td>5</td></tr>
+                <tr><td>US-16</td><td>Rechercher des cours</td><td><span class="priority-low">Basse</span></td><td>5</td></tr>
+                <tr><td>US-20</td><td>Contacter l'administration</td><td><span class="priority-low">Basse</span></td><td>3</td></tr>
+            </tbody>
+            </table>
+            <p><strong>Livrables :</strong> Site déployé, documentation, tests utilisateurs.</p>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 6 - Cas d'Utilisation -->
+        <h2 id="section6">6. CAS D'UTILISATION</h2>
+        
+        <div class="use-case-card">
+            <div class="use-case-title">📌 UC-01 : S'authentifier</div>
+            <p><strong>Acteurs :</strong> Étudiant, Responsable Club, Administrateur</p>
+            <p><strong>Préconditions :</strong> Avoir un compte valide</p>
+            <p><strong>Scénario nominal :</strong> 1. L'utilisateur accède à la page de connexion → 2. Il saisit email et mot de passe → 3. Le système vérifie les identifiants → 4. Redirection vers le dashboard adapté</p>
+        </div>
+        
+        <div class="use-case-card">
+            <div class="use-case-title">📌 UC-02 : S'inscrire à un club</div>
+            <p><strong>Acteurs :</strong> Étudiant</p>
+            <p><strong>Préconditions :</strong> Authentifié et non déjà membre</p>
+            <p><strong>Scénario nominal :</strong> 1. Consultation de la page du club → 2. Clic sur "Rejoindre" → 3. Formulaire d'inscription → 4. Validation → 5. Notification au responsable club</p>
+        </div>
+        
+        <div class="use-case-card">
+            <div class="use-case-title">📌 UC-03 : Publier un événement</div>
+            <p><strong>Acteurs :</strong> Responsable Club, Administrateur</p>
+            <p><strong>Préconditions :</strong> Authentifié avec droits de publication</p>
+            <p><strong>Scénario nominal :</strong> 1. Accès au dashboard → 2. "Ajouter un événement" → 3. Remplir les champs → 4. Validation → 5. Événement visible dans le calendrier</p>
+        </div>
+        
+        <div class="use-case-card">
+            <div class="use-case-title">📌 UC-04 : Télécharger une ressource pédagogique</div>
+            <p><strong>Acteurs :</strong> Étudiant</p>
+            <p><strong>Préconditions :</strong> Authentifié</p>
+            <p><strong>Scénario nominal :</strong> 1. Navigation dans "Ressources" → 2. Application des filtres → 3. Clic sur le document → 4. Téléchargement du fichier</p>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 7 - Diagrammes de Séquence -->
+        <h2 id="section7">7. DIAGRAMMES DE SÉQUENCE</h2>
+        
+        <h3>Diagramme de séquence - Inscription à un club (UC-02)</h3>
+        <div class="diagram-container">
+            <pre>
+┌────────┐      ┌──────────┐      ┌──────────┐      ┌──────────┐
+│Étudiant│      │ Frontend │      │ Backend  │      │   Email  │
+└───┬────┘      └────┬─────┘      └────┬─────┘      └────┬─────┘
+    │                │                 │                 │
+    │ Clique "Rejoindre"               │                 │
+    │───────────────>│                 │                 │
+    │                │                 │                 │
+    │ Affiche formulaire               │                 │
+    │<───────────────│                 │                 │
+    │                │                 │                 │
+    │ Remplit et valide                │                 │
+    │───────────────>│                 │                 │
+    │                │                 │                 │
+    │                │ POST /api/clubs/{id}/join         │
+    │                │────────────────>│                 │
+    │                │                 │                 │
+    │                │                 │ Vérifie droits  │
+    │                │                 │ Enregistre demande
+    │                │                 │                 │
+    │                │                 │ Envoie email    │
+    │                │                 │────────────────>│
+    │                │                 │                 │
+    │                │     Réponse 200 │                 │
+    │                │<────────────────│                 │
+    │                │                 │                 │
+    │ Confirmation   │                 │                 │
+    │<───────────────│                 │                 │
+            </pre>
+            <div class="diagram-title">Figure 1 : Diagramme de séquence - Inscription à un club</div>
+        </div>
+        
+        <h3>Diagramme de séquence - Connexion (UC-01)</h3>
+        <div class="diagram-container">
+            <pre>
+┌────────┐      ┌──────────┐      ┌──────────┐
+│Utilisat│      │ Frontend │      │ Backend  │
+│eur     │      │          │      │          │
+└───┬────┘      └────┬─────┘      └────┬─────┘
+    │                │                 │
+    │ Saisit email/mdp                 │
+    │───────────────>│                 │
+    │                │                 │
+    │                │ POST /api/login │
+    │                │────────────────>│
+    │                │                 │
+    │                │                 │ Vérifie identifiants
+    │                │                 │ Génère token JWT
+    │                │                 │
+    │                │   Réponse token  │
+    │                │<────────────────│
+    │                │                 │
+    │ Redirection    │                 │
+    │<───────────────│                 │
+    │ Dashboard      │                 │
+            </pre>
+            <div class="diagram-title">Figure 2 : Diagramme de séquence - Authentification</div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 8 -->
+        <h2 id="section8">8. RÉPARTITION DES TÂCHES PAR SPRINT</h2>
+        
+        <h3>Sprint 1 (Semaines 1-3) : Configuration & Base technique</h3>
+        <table><thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
+        <tbody>
+            <tr><td>Mise en place du repository GitHub (branches, protection)</td><td>M6</td><td>4h</td></tr>
+            <tr><td>Configuration du projet Laravel</td><td>M4</td><td>4h</td></tr>
+            <tr><td>Configuration du projet React + Vite</td><td>M3</td><td>4h</td></tr>
+            <tr><td>Modélisation de la base de données</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>Création des migrations et modèles</td><td>M4</td><td>8h</td></tr>
+            <tr><td>Mise en place de l'authentification (JWT/Sanctum)</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>Création des pages de base (layout, routing React)</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Intégration des maquettes Figma</td><td>M3, M5</td><td>12h</td></tr>
+            <tr><td>Page d'accueil, Faculté et Licences</td><td>M3, M5</td><td>20h</td></tr>
+            <tr><td>Responsive design (mobile, tablette)</td><td>M3</td><td>8h</td></tr>
+        </tbody>
+        </table>
+        
+        <h3>Sprint 2 (Semaines 4-6) : Formations, Clubs & Cours</h3>
+        <table><thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
+        <tbody>
+            <tr><td>API CRUD pour les formations (licences)</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>API CRUD pour les clubs</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>API CRUD pour les cours</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>API pour les inscriptions aux clubs</td><td>M4, M5</td><td>6h</td></tr>
+            <tr><td>Dashboard responsable club</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>Page liste des clubs et page détail</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Page listant les cours par licence</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Intégration des API côté frontend (Axios)</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Tests d'intégration</td><td>M6</td><td>4h</td></tr>
+        </tbody>
+        </table>
+        
+        <h3>Sprint 3 (Semaines 7-9) : Ressources, Événements & Dashboard Admin</h3>
+        <table><thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
+        <tbody>
+            <tr><td>API CRUD pour les ressources</td><td>M4, M5</td><td>10h</td></tr>
+            <tr><td>Système d'upload de fichiers</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>API CRUD pour les événements</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>Page ressources avec filtres</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Calendrier interactif (FullCalendar)</td><td>M3</td><td>8h</td></tr>
+            <tr><td>Page événements avec calendrier</td><td>M3, M5</td><td>6h</td></tr>
+            <tr><td>Inscription aux événements</td><td>M4, M5</td><td>6h</td></tr>
+            <tr><td>Dashboard admin complet</td><td>M3, M5</td><td>10h</td></tr>
+            <tr><td>Graphiques (Chart.js) : statistiques</td><td>M3</td><td>8h</td></tr>
+            <tr><td>Gestion des utilisateurs (CRUD)</td><td>M4, M5</td><td>8h</td></tr>
+            <tr><td>Gestion des rôles et permissions</td><td>M4</td><td>6h</td></tr>
+        </tbody>
+        </table>
+        
+        <h3>Sprint 4 (Semaines 10-12) : Tests, Optimisation & Déploiement</h3>
+        <table><thead><tr><th>Tâche</th><th>Responsable</th><th>Estimation</th></tr></thead>
+        <tbody>
+            <tr><td>Système de notifications (email)</td><td>M4</td><td>8h</td></tr>
+            <tr><td>Fonctionnalité de recherche de cours</td><td>M3, M5</td><td>8h</td></tr>
+            <tr><td>Formulaire de contact administration</td><td>M6</td><td>4h</td></tr>
+            <tr><td>Tests utilisateurs (15 étudiants)</td><td>M1, M2</td><td>8h</td></tr>
+            <tr><td>Correction des bugs critiques</td><td>Équipe</td><td>12h</td></tr>
+            <tr><td>Optimisation SEO (metatags, sitemap)</td><td>M3</td><td>4h</td></tr>
+            <tr><td>Optimisation performance (Lighthouse > 90)</td><td>M3, M6</td><td>8h</td></tr>
+            <tr><td>Sécurisation (HTTPS, headers)</td><td>M4, M6</td><td>4h</td></tr>
+            <tr><td>Déploiement frontend (Vercel)</td><td>M6</td><td>2h</td></tr>
+            <tr><td>Déploiement backend (Heroku)</td><td>M6</td><td>2h</td></tr>
+            <tr><td>Documentation technique et utilisateur</td><td>M2, M6</td><td>8h</td></tr>
+            <tr><td>Préparation de la soutenance</td><td>M1, M2</td><td>8h</td></tr>
+        </tbody>
+        </table>
+        
+        <div class="page-break"></div>
+        
+        <!-- Section 9 - Conclusion -->
+        <h2 id="section9">9. CONCLUSION</h2>
+        
+        <div class="grid-2">
             <div class="card">
                 <h3>✅ Réalisations prévues</h3>
                 <ul>
-                    <li>Site web full-stack complet, responsive et fonctionnel</li>
-                    <li>20 user stories implémentées avec priorisation agile</li>
+                    <li>Site web full-stack complet, responsive</li>
+                    <li>20 user stories implémentées sur 4 sprints</li>
                     <li>Architecture moderne (React + Laravel + MySQL)</li>
-                    <li>Authentification sécurisée avec rôles (étudiant, club, admin)</li>
-                    <li>Gestion complète des clubs, cours, ressources et événements</li>
+                    <li>Authentification sécurisée avec rôles</li>
+                    <li>Gestion complète des clubs, cours, ressources</li>
                     <li>Dashboard admin avec statistiques</li>
-                    <li>Documentation technique et utilisateur complète</li>
                     <li>Déploiement en ligne (Vercel + Heroku)</li>
                 </ul>
             </div>
-            
             <div class="card">
                 <h3>💡 Bénéfices pour les étudiants</h3>
                 <ul>
-                    <li>📌 Accès centralisé aux informations de l'ISITCOM</li>
-                    <li>⏱️ Gain de temps dans la recherche de cours et examens</li>
-                    <li>🎭 Meilleure visibilité des clubs et de leurs activités</li>
-                    <li>📅 Participation accrue aux événements via le calendrier</li>
-                    <li>📱 Interface mobile pour accéder aux infos partout</li>
+                    <li>📌 Accès centralisé aux informations</li>
+                    <li>⏱️ Gain de temps dans la recherche</li>
+                    <li>🎭 Meilleure visibilité des clubs</li>
+                    <li>📅 Participation accrue aux événements</li>
+                    <li>📱 Interface mobile partout</li>
                 </ul>
-            </div>
-            
-    
-            
-            <div class="footer-note">
-                <p><strong>ISITCOM EDUCONNECT</strong> - Projet PFA 2025-2026</p>
-                <p>Équipe de 6 personnes - Méthodologie Agile - Full Stack</p>
-                <p>Document généré le : <script>document.write(new Date().toLocaleDateString('fr-FR'));</script></p>
             </div>
         </div>
         
-        <script>
-            // Pour les liens internes
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if(target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
+        <div class="card">
+            <h3>🙏 Remerciements</h3>
+            <ul>
+                <li>Dr. Amal elbehi pour son accompagnement</li>
+                <li>L'administration de l'ISITCOM pour les informations</li>
+                <li>Toute l'équipe de 6 personnes pour leur engagement</li>
+                <li>Les étudiants testeurs pour leurs retours</li>
+            </ul>
+        </div>
+        
+        <div class="footer-note">
+            <p><strong>ISITCOM EDUCONNECT</strong> - Projet PFA 2025-2026</p>
+            <p>Équipe de 6 personnes - Méthodologie Agile - Full Stack</p>
+            <p>Document généré le : <script>document.write(new Date().toLocaleDateString('fr-FR'));</script></p>
+        </div>
+    </div>
+    
+    <script>
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
-        </script>
-    </body>
-    </html>
+        });
+    </script>
+</body>
+</html>

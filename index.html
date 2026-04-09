@@ -13,28 +13,94 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            color: #2c3e50;
-            line-height: 1.6;
+        :root {
+            --bg-primary: #f5f7fb;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a2c3e;
+            --text-secondary: #5a6e7c;
+            --card-bg: #ffffff;
+            --border: #eef2f6;
+            --header-bg: #ffffff;
+            --hero-bg: linear-gradient(105deg, #0f2b3d 0%, #1a4a6a 100%);
+            --accent: #2c7da0;
+            --accent-light: #e8f0fe;
+            --shadow: 0 4px 20px rgba(0,0,0,0.02);
+            --error: #e74c3c;
+            --success: #27ae60;
         }
 
-        /* Header & Navigation */
+        body.dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --header-bg: #1e293b;
+            --hero-bg: linear-gradient(105deg, #0a1628 0%, #0f2b3d 100%);
+            --accent: #4a90e2;
+            --accent-light: #2d3748;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            transition: all 0.3s;
+        }
+
+        /* ===== ANIMATIONS GLOBALES ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 0 0 rgba(44,125,160,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(44,125,160,0); }
+            100% { box-shadow: 0 0 0 0 rgba(44,125,160,0); }
+        }
+
+        .section, .card, .resource-card, .event-list-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .hero h1, .hero p, .hero .btn {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        .hero h1 { animation-delay: 0s; }
+        .hero p { animation-delay: 0.1s; }
+        .hero .btn { animation-delay: 0.2s; }
+
+        /* ===== HEADER & NAVIGATION ===== */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: var(--header-bg);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
 
         nav {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0.8rem 2rem;
+            padding: 0.75rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,22 +109,22 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
         .logo-img {
-            height: 50px;
+            height: 45px;
             width: auto;
-            border-radius: 12px;
+            border-radius: 10px;
         }
         .logo-text {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #003f5f;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
         }
         .logo-text span {
             font-size: 0.7rem;
             display: block;
-            color: #00a1ab;
+            color: var(--accent);
         }
 
         .nav-links {
@@ -67,191 +133,212 @@
             list-style: none;
             flex-wrap: wrap;
         }
-
         .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: var(--text-secondary);
             font-weight: 500;
-            transition: all 0.3s;
-            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            transition: color 0.2s;
         }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .mobile-menu { display: none; font-size: 1.4rem; cursor: pointer; }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: #00a1ab;
-            border-bottom: 2px solid #00a1ab;
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
+        .theme-toggle {
+            background: var(--accent-light);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
             cursor: pointer;
+            color: var(--accent);
+            margin-left: 1rem;
+            transition: transform 0.2s;
         }
+        .theme-toggle:hover { transform: rotate(15deg); }
 
-        /* Hero Section */
+        /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, #003f5f 0%, #00a1ab 100%);
+            background: var(--hero-bg);
             color: white;
-            padding: 8rem 2rem 5rem;
+            padding: 9rem 2rem 5rem;
             text-align: center;
-            margin-top: 70px;
-            border-radius: 0 0 50px 50px;
-            position: relative;
-            overflow: hidden;
+            margin-top: 65px;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; position: relative; z-index: 1; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; position: relative; z-index: 1; }
-        
+        .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 650px; margin: 0 auto 2rem; }
+
         .btn {
             display: inline-block;
-            padding: 12px 32px;
+            padding: 0.8rem 2rem;
             background: white;
-            color: #003f5f;
-            text-decoration: none;
+            color: #0f2b3d;
             border-radius: 40px;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: none;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: none;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .btn-small {
-            padding: 8px 20px;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            display: inline-block;
-        }
-        .btn-submit {
-            background: linear-gradient(135deg, #00a1ab, #003f5f);
-            color: white;
-            width: 100%;
-            margin-top: 1rem;
-        }
-        .btn-submit:hover {
-            transform: translateY(-2px);
-        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+        .btn-small { padding: 0.4rem 1.2rem; font-size: 0.8rem; }
 
-        /* Container */
-        .container { max-width: 1300px; margin: 0 auto; padding: 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
 
-        /* Sections */
+        /* ===== SECTIONS ===== */
         .section {
-            background: white;
+            background: var(--card-bg);
             margin: 2rem 0;
-            border-radius: 30px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
         }
         .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: #003f5f;
+            font-size: 1.8rem;
             text-align: center;
-            position: relative;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
         .section-title:after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #00a1ab, #003f5f);
-            margin: 0.5rem auto;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0.7rem auto;
             border-radius: 2px;
         }
-        .section-subtitle { text-align: center; color: #5d6d7e; margin-bottom: 2rem; font-size: 1.1rem; }
 
-        /* Cards & Grids */
+        /* ===== CARDS ===== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
         }
         .card {
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            border: none;
-            position: relative;
+            border: 1px solid var(--border);
             cursor: pointer;
+            transition: all 0.3s;
         }
-        .card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-        }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 16px 28px -12px rgba(0,0,0,0.15); border-color: var(--accent); }
         .card-img {
-            width: 100%;
             height: 180px;
-            background: linear-gradient(135deg, #e8f0fe 0%, #d4e6f1 100%);
+            width: 100%;
+            overflow: hidden;
+        }
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .card:hover .card-img img { transform: scale(1.05); }
+        .card-img-icon {
+            height: 180px;
+            background: linear-gradient(135deg, var(--accent-light), var(--border));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #003f5f;
-            font-size: 3.5rem;
-            transition: transform 0.3s;
+            font-size: 3rem;
+            color: var(--accent);
         }
-        .card:hover .card-img {
-            transform: scale(1.02);
-        }
-        .card-content { padding: 1.5rem; }
-        .card h3 { color: #003f5f; margin-bottom: 0.8rem; font-size: 1.3rem; }
+        .card-content { padding: 1.3rem; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .card p { font-size: 0.85rem; color: var(--text-secondary); }
 
-        /* Club Badges */
+        /* ===== BADGES ===== */
+        .badge-license, .badge-master, .badge-ing, .badge-doctorat {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .badge-license { background: var(--accent-light); color: var(--accent); }
+        .badge-master { background: #fef3e2; color: #c97e1a; }
+        .badge-ing { background: #e3f0fc; color: #1f6392; }
+        .badge-doctorat { background: #fee8e8; color: #bc4e4e; }
         .club-badge {
             display: inline-block;
-            background: #00a1ab20;
-            color: #00a1ab;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
             font-size: 0.7rem;
-            font-weight: bold;
-            margin-bottom: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            background: var(--accent-light);
+            color: var(--accent);
         }
 
-        /* Formulaire */
+        /* ===== GALERIE ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .gallery-item {
+            height: 150px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .gallery-item img:hover { transform: scale(1.08); }
+
+        /* ===== FORMULAIRE INSCRIPTION AMÉLIORÉ ===== */
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
         }
         .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #003f5f;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+            transition: color 0.2s;
         }
         .form-group input, .form-group select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--border);
             border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: #f8f9fa;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.2s;
         }
         .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: #00a1ab;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(0,161,171,0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.2);
+            animation: glow 0.5s ease-out;
+        }
+        .form-group.error input, .form-group.error select {
+            border-color: var(--error);
+            animation: shake 0.3s ease-in-out;
+        }
+        .form-group.error label {
+            color: var(--error);
+        }
+        .error-message {
+            background: #fee8e8;
+            color: #bc4e4e;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            display: none;
+            margin-top: 0.3rem;
         }
         .form-row {
             display: grid;
@@ -259,465 +346,172 @@
             gap: 1rem;
         }
         .success-message {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            color: #155724;
-            padding: 1rem;
+            background: #e6f7ec;
+            color: #1e7b3a;
+            padding: 0.8rem;
             border-radius: 12px;
-            margin-bottom: 1rem;
             text-align: center;
             display: none;
-            font-weight: 500;
+            margin-bottom: 1rem;
+            animation: slideUp 0.4s ease-out;
         }
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 0.5rem;
-            border-radius: 8px;
-            margin-top: 0.3rem;
-            font-size: 0.8rem;
-            display: none;
+        .btn-submit {
+            background: var(--accent);
+            color: white;
+            width: 100%;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            background: #1f6392;
+            transform: translateY(-2px);
+            animation: pulse 0.4s ease;
         }
 
-        /* Resource Grid */
+        /* ===== RESSOURCES ===== */
         .resource-toolbar {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr 1fr auto;
+            display: flex;
             gap: 1rem;
-            background: linear-gradient(135deg, #f7fbfc, #eef6f8);
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 22px;
-            padding: 1.2rem;
+            flex-wrap: wrap;
             margin-bottom: 1.5rem;
         }
-        .resource-toolbar input,
-        .resource-toolbar select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e4ecef;
-            border-radius: 14px;
-            background: white;
-            color: #2c3e50;
-            font-size: 0.95rem;
-        }
-        .resource-toolbar input:focus,
-        .resource-toolbar select:focus {
-            outline: none;
-            border-color: #00a1ab;
-            box-shadow: 0 0 0 4px rgba(0,161,171,0.1);
-        }
-        .resource-toolbar .btn {
-            align-self: stretch;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .resource-summary {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            color: #5d6d7e;
-            flex-wrap: wrap;
-        }
-        .resource-summary strong {
-            color: #003f5f;
-        }
-        .resource-tags {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-        .resource-tag {
-            background: #eef8f9;
-            color: #00707a;
-            border-radius: 999px;
-            padding: 0.35rem 0.8rem;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .resource-toolbar input, .resource-toolbar select {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background: var(--bg-primary);
+            flex: 1;
         }
         .resource-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.4rem;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.2rem;
         }
         .resource-card {
-            background: linear-gradient(180deg, #ffffff, #f8fbfc);
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 22px;
-            padding: 1.4rem;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            min-height: 260px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.2rem;
+            transition: all 0.3s;
         }
-        .resource-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 0.8rem;
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow);
         }
         .resource-card-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-            color: white;
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: 0 10px 20px rgba(0,63,95,0.18);
+            color: white;
+            margin-bottom: 0.8rem;
         }
-        .resource-type-badge,
-        .resource-level-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            border-radius: 999px;
-            padding: 0.35rem 0.8rem;
-            font-size: 0.76rem;
-            font-weight: 700;
-        }
-        .resource-type-badge {
-            background: #e8f6f7;
-            color: #007e87;
-        }
-        .resource-level-badge {
-            background: #f3f6fa;
-            color: #506273;
-        }
-        .resource-meta {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            color: #5d6d7e;
-            font-size: 0.85rem;
-        }
-        .resource-meta span {
-            background: #f4f7f9;
-            border-radius: 999px;
-            padding: 0.3rem 0.7rem;
-        }
-        .resource-card p {
-            color: #526171;
-            flex: 1;
-        }
-        .resource-actions {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.8rem;
-            align-items: center;
-            margin-top: auto;
+        .resource-tag {
+            background: var(--accent-light);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
         }
         .resource-download {
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
+            background: var(--accent);
             color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
             text-decoration: none;
-            padding: 0.85rem 1rem;
-            border-radius: 14px;
-            font-weight: 700;
             display: inline-flex;
-            gap: 0.55rem;
             align-items: center;
-            justify-content: center;
-            flex: 1;
-            box-shadow: 0 10px 20px rgba(0,63,95,0.16);
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+            transition: all 0.2s;
         }
         .resource-download:hover {
-            transform: translateY(-2px);
-        }
-        .resource-empty {
-            background: linear-gradient(135deg, #fbfcfd, #f2f6f8);
-            border: 2px dashed #cdd9df;
-            color: #607080;
-            border-radius: 24px;
-            padding: 2rem;
-            text-align: center;
+            background: #1f6392;
+            transform: translateX(3px);
         }
 
-        /* Events */
-        .events-shell {
-            display: grid;
-            grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
-            gap: 1.5rem;
-            align-items: start;
-        }
-        .calendar-card,
-        .event-panel {
-            background: linear-gradient(180deg, #ffffff, #f8fbfc);
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 24px;
-            padding: 1.4rem;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.05);
-        }
-        .calendar-header,
-        .event-panel-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .calendar-badge {
-            background: #eef8f9;
-            color: #007e87;
-            border-radius: 999px;
-            padding: 0.35rem 0.8rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-        .event-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        .event-stat {
-            background: #f5fafb;
-            border-radius: 18px;
-            padding: 1rem;
-            text-align: center;
-        }
-        .event-stat strong {
-            display: block;
-            color: #003f5f;
-            font-size: 1.5rem;
-        }
-        #calendar {
-            min-height: 540px;
-        }
-        .fc .fc-toolbar-title {
-            color: #003f5f;
-            font-size: 1.35rem;
-        }
-        .fc .fc-button-primary {
-            background: #003f5f;
-            border-color: #003f5f;
-        }
-        .fc .fc-button-primary:hover,
-        .fc .fc-button-primary:focus {
-            background: #00a1ab;
-            border-color: #00a1ab;
-            box-shadow: none;
-        }
-        .fc .fc-daygrid-event {
-            border: none;
-            border-radius: 10px;
-            padding: 3px 6px;
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-        }
-        .event-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .event-list-card {
-            background: #f7fbfc;
-            border: 1px solid rgba(0, 63, 95, 0.08);
-            border-radius: 18px;
-            padding: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+        /* ===== ÉVÉNEMENTS ===== */
+        .events-shell { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .calendar-card, .event-panel { background: var(--bg-primary); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border); }
+        .event-list-card { 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 1rem; 
+            margin-bottom: 1rem; 
+            border: 1px solid var(--border);
+            transition: all 0.3s;
         }
         .event-list-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+            transform: translateX(6px);
+            border-color: var(--accent);
         }
-        .event-card-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.8rem;
-            align-items: flex-start;
-            margin-bottom: 0.7rem;
-        }
-        .event-card-date {
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-            color: white;
-            border-radius: 16px;
-            padding: 0.8rem 0.9rem;
-            min-width: 82px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,63,95,0.16);
-        }
-        .event-card-date .day {
-            font-size: 1.5rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .event-card-date .month {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-        .event-card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-            margin: 0.8rem 0;
-            color: #586878;
-            font-size: 0.85rem;
-        }
-        .event-card-meta span {
-            background: white;
-            border-radius: 999px;
-            padding: 0.3rem 0.7rem;
-        }
-        .event-card-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            margin-top: 1rem;
-        }
-        .event-link-btn {
-            border: none;
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
-            font-weight: 700;
+        .event-link-btn { 
+            background: var(--accent-light); 
+            border: none; 
+            border-radius: 30px; 
+            padding: 0.4rem 1rem; 
+            font-weight: 600; 
             cursor: pointer;
+            transition: all 0.2s;
         }
-        .event-link-btn:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-        }
-        .event-link-btn.primary {
-            background: linear-gradient(135deg, #003f5f, #00a1ab);
-            color: white;
-        }
-        .event-link-btn.secondary {
-            background: #ecf3f5;
-            color: #003f5f;
-        }
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            border-radius: 999px;
-            padding: 0.35rem 0.8rem;
-            font-size: 0.76rem;
-            font-weight: 700;
-        }
-        .status-pill.registered {
-            background: #dff4e5;
-            color: #19703b;
-        }
-        .status-pill.open {
-            background: #eef8f9;
-            color: #007e87;
-        }
-        .status-pill.full {
-            background: #fde7e8;
-            color: #a32832;
-        }
-        .event-form-grid {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .event-form-grid .form-group {
-            margin-bottom: 0;
-        }
-        .event-register-feedback {
-            margin-top: 0.8rem;
-            border-radius: 12px;
-            padding: 0.85rem 1rem;
-            font-weight: 600;
-            display: none;
-        }
-        .event-register-feedback.error {
-            display: block;
-            background: #fde9eb;
-            color: #8f2430;
-        }
-        .event-register-feedback.success {
-            display: block;
-            background: #e3f6e8;
-            color: #17713c;
-        }
+        .event-link-btn.primary { background: var(--accent); color: white; }
+        .event-link-btn.primary:hover { background: #1f6392; transform: scale(1.02); }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         footer {
-            background: #1a2c3a;
-            color: #ecf0f1;
-            padding: 3rem 2rem 1rem;
+            background: #0f2b3d;
+            color: #cbd5e1;
+            padding: 3rem 2rem 1.5rem;
             margin-top: 3rem;
             border-radius: 30px 30px 0 0;
         }
-        .footer-grid {
-            max-width: 1300px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-        }
-        .footer-section h4 { color: #00a1ab; margin-bottom: 1rem; }
-        .social-links a { color: white; margin-right: 1rem; font-size: 1.3rem; transition: all 0.3s; display: inline-block; }
-        .social-links a:hover { color: #00a1ab; transform: translateY(-3px); }
-        .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2c3e50; }
+        .footer-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem; }
+        .footer-section h4 { color: white; margin-bottom: 1rem; }
+        .social-links a { color: #cbd5e1; margin-right: 1rem; font-size: 1.1rem; transition: all 0.2s; }
+        .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #1e3a5f; font-size: 0.75rem; }
 
-        /* Modal */
+        /* ===== MODAL ===== */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.7);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            animation: fadeIn 0.3s ease;
         }
         .modal-content {
-            background: white;
-            padding: 2rem;
+            background: var(--card-bg);
+            padding: 1.8rem;
             border-radius: 24px;
             max-width: 500px;
             width: 90%;
             position: relative;
-            animation: modalFadeIn 0.3s;
-        }
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            animation: slideUp 0.3s ease;
         }
         .close-modal {
             position: absolute;
             top: 1rem; right: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            color: #999;
-            transition: color 0.2s;
+            transition: transform 0.2s;
         }
-        .close-modal:hover { color: #003f5f; }
+        .close-modal:hover { transform: scale(1.1); }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 800px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
             .hero h1 { font-size: 1.8rem; }
-            .section-title { font-size: 1.6rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .resource-toolbar,
-            .events-shell,
-            .event-stats {
-                grid-template-columns: 1fr;
-            }
-            .resource-summary,
-            .calendar-header,
-            .event-panel-header,
-            .event-card-top,
-            .resource-actions,
-            .dashboard-header-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            #calendar {
-                min-height: 420px;
-            }
-            .dashboard-tabs {
-                flex-direction: column;
-            }
+            .form-row, .events-shell { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -725,320 +519,199 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="photo/logo.jpg" alt="Logo ISITCOM" class="logo-img" id="logo-placeholder" onerror="this.src='https://via.placeholder.com/50x50?text=ISITCOM'">
+                <img src="photo/logo.jpg" alt="Logo ISITCOM" class="logo-img">
                 <div class="logo-text">ISITCOM<br><span>Hammam Sousse</span></div>
             </div>
             <ul class="nav-links">
-                <li><a href="#home" class="active">Accueil</a></li>
-                <li><a href="#faculte">Faculté</a></li>
-                <li><a href="#licences">Licences</a></li>
-                <li><a href="#cycle-ingenieur">Cycle Ingénieur</a></li>
-                <li><a href="#masters">Masters</a></li>
-                <li><a href="#doctorat">Doctorat</a></li>
-                <li><a href="#clubs">Vie étudiante</a></li>
-                <li><a href="#cours">Cours</a></li>
-                <li><a href="#ressources">Ressources</a></li>
-                <li><a href="#evenements">Événements</a></li>
-                <li><a href="#inscription">Inscription</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home">Accueil</a></li><li><a href="#faculte">Faculté</a></li><li><a href="#licences">Licences</a></li>
+                <li><a href="#cycle-ingenieur">Ingénieur</a></li><li><a href="#masters">Masters</a></li><li><a href="#doctorat">Doctorat</a></li>
+                <li><a href="#clubs">Clubs</a></li><li><a href="#cours">Cours</a></li><li><a href="#ressources">Ressources</a></li>
+                <li><a href="#evenements">Événements</a></li><li><a href="#inscription">Inscription</a></li><li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
             <div class="mobile-menu"><i class="fas fa-bars"></i></div>
         </nav>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <h1>Bienvenue à l'ISITCOM</h1>
-            <p>Institut Supérieur d'Informatique et des Technologies de Communication • Université de Sousse</p>
-            <div style="position: relative; z-index: 1; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-                <a href="#licences" class="btn">Découvrir nos formations</a>
-            </div>
+            <h1>ISITCOM</h1>
+            <p>Institut Supérieur d'Informatique et des Technologies de Communication<br>Hammam Sousse - Université de Sousse</p>
+            <a href="#licences" class="btn">Découvrir nos formations</a>
         </section>
 
         <div class="container">
-            <!-- Faculté Section -->
+            <!-- Section Faculté avec les nouvelles images -->
             <section id="faculte" class="section">
-                <h2 class="section-title">Notre institut</h2>
+                <h2 class="section-title">L'ISITCOM en bref</h2>
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-university fa-4x"></i></div>
-                        <div class="card-content">
-                            <h3>ISITCOM en bref</h3>
-                            <p>Créée en 2001 par décret N° 1912/2001, l'ISITCOM est un établissement public d'enseignement supérieur spécialisé dans les technologies de l'information et de la communication. Elle est la seconde institution tunisienne d'enseignement des télécommunications après l'École supérieure des communications de Tunis.</p>
-                        </div>
+                        <div class="card-img"><img src="photo/fondation.png" alt="Fondation"></div>
+                        <div class="card-content"><h3>Fondation</h3><p>Créée en août 2001, 2ᵉ institution tunisienne d'enseignement des télécommunications.</p></div>
                     </div>
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-chalkboard-user fa-4x"></i></div>
-                        <div class="card-content">
-                            <h3>Chiffres clés</h3>
-                            <p><strong>+1 800 étudiants</strong> • <strong>3 licences appliquées</strong> • <strong>1 cycle ingénieur</strong> • <strong>6 masters</strong> • <strong>Doctorat</strong> • Taux d'insertion professionnelle : <strong>+85%</strong></p>
-                        </div>
+                        <div class="card-img"><img src="photo/chiffre en cles.jpg" alt="Chiffres clés"></div>
+                        <div class="card-content"><h3>Chiffres clés</h3><p>1 800+ étudiants • 3 licences • 1 cycle ingénieur • 6 masters • Doctorat</p></div>
                     </div>
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-building fa-4x"></i></div>
-                        <div class="card-content">
-                            <h3>Galerie photos</h3>
-                            <p>Découvrez notre campus moderne, nos amphithéâtres et nos laboratoires de pointe.</p>
-                            <div style="display: flex; gap: 8px; margin-top: 10px;">
-                                <img src="https://picsum.photos/id/20/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
-                                <img src="https://picsum.photos/id/26/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
-                                <img src="https://picsum.photos/id/29/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
-                            </div>
-                        </div>
+                        <div class="card-img"><img src="photo/location.png" alt="Localisation"></div>
+                        <div class="card-content"><h3>Localisation</h3><p>Route GP1, Hammam Sousse 4011, Tunisie. LabTIC, LISI, CRISTAL.</p></div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem; color: var(--accent);">📸 Galerie du campus</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><img src="photo/face.jpg" alt="Campus ISITCOM"></div>
+                        <div class="gallery-item"><img src="photo/fac2.jpg" alt="Campus vue"></div>
+                        <div class="gallery-item"><img src="photo/num.jpg" alt="Laboratoire"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Licences Section -->
+            <!-- Licences -->
             <section id="licences" class="section">
                 <h2 class="section-title">Licences Appliquées</h2>
-                <p class="section-subtitle">3 formations d'excellence pour devenir expert en technologies du numérique</p>
                 <div class="cards-grid">
                     <div class="card" onclick="showLicenceDetails('Multimédia')">
-                        <div class="card-img"><i class="fas fa-laptop-code fa-4x" style="color:#003f5f;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license">Licence Appliquée</span>
-                            <h3>Technologies du Multimédia</h3>
-                            <p>Formation aux métiers du web : développement front-end/back-end, design UX/UI, création de contenus numériques innovants.</p>
-                            <p><strong>📚 Programme :</strong> React, Node.js, PHP, Bases de données, Graphisme 3D, Marketing digital</p>
-                            <p><strong>💼 Débouchés :</strong> Développeur full-stack, Chef de projet digital, Concepteur multimédia</p>
-                            <button class="btn btn-small">📘 Voir les ressources</button>
-                        </div>
+                        <div class="card-img"><img src="photo/multimedia.avif" alt="Multimédia"></div>
+                        <div class="card-content"><span class="badge-license">Licence</span><h3>Technologies du Multimédia</h3><p>React, Node.js, UX/UI, graphisme 3D.</p></div>
                     </div>
                     <div class="card" onclick="showLicenceDetails('IoT')">
-                        <div class="card-img"><i class="fas fa-microchip fa-4x" style="color:#003f5f;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license">Licence Appliquée</span>
-                            <h3>Systèmes Embarqués & Internet des Objets (IoT)</h3>
-                            <p>Formation aux objets connectés : conception de systèmes embarqués, programmation Arduino/Raspberry Pi, protocoles IoT (LoRa, MQTT).</p>
-                            <p><strong>📚 Programme :</strong> Architecture embarquée, Réseaux sans fil, Traitement du signal, Programmation système</p>
-                            <p><strong>💼 Débouchés :</strong> Ingénieur IoT, Concepteur systèmes embarqués, Intégrateur solutions connectées</p>
-                            <button class="btn btn-small">📘 Voir les ressources</button>
-                        </div>
+                        <div class="card-img"><img src="photo/iot.webp" alt="IoT"></div>
+                        <div class="card-content"><span class="badge-license">Licence</span><h3>IoT & Systèmes Embarqués</h3><p>Arduino, Raspberry Pi, protocoles IoT.</p></div>
                     </div>
                     <div class="card" onclick="showLicenceDetails('Télécom')">
-                        <div class="card-img"><i class="fas fa-signal fa-4x" style="color:#003f5f;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license">Licence Appliquée</span>
-                            <h3>Technologies des Communications</h3>
-                            <p>Spécialisation en réseaux et télécommunications : transmission de données, réseaux mobiles (4G/5G), cybersécurité, administration systèmes.</p>
-                            <p><strong>📚 Programme :</strong> Réseaux IP, Sécurisation des flux, Télécommunications optiques, Administration Linux/Windows</p>
-                            <p><strong>💼 Débouchés :</strong> Administrateur réseaux, Technicien télécom, Consultant en cybersécurité</p>
-                            <button class="btn btn-small">📘 Voir les ressources</button>
-                        </div>
+                        <div class="card-img"><img src="photo/telecom.jpg" alt="Télécom"></div>
+                        <div class="card-content"><span class="badge-license">Licence</span><h3>Technologies des Communications</h3><p>Réseaux 4G/5G, cybersécurité.</p></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Cycle Ingénieur Section -->
+            <!-- Cycle Ingénieur -->
             <section id="cycle-ingenieur" class="section">
-                <h2 class="section-title">🎓 Cycle Ingénieur</h2>
-                <p class="section-subtitle">Diplôme National d'Ingénieur en Téléinformatique - Formation unique en Tunisie</p>
+                <h2 class="section-title">Cycle Ingénieur</h2>
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-certificate fa-4x" style="color:#3498db;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-ing">Diplôme National d'Ingénieur</span>
-                            <h3>Ingénieur en Téléinformatique</h3>
-                            <p><strong>📌 Présentation :</strong> Formation d'excellence de 3 ans (cycle intégré) combinant l'informatique et les télécommunications.</p>
-                            <p><strong>📚 Programme principal :</strong> Réseaux avancés (5G), Sécurité, Cloud Computing, IA, IoT embarqués</p>
-                            <p><strong>💼 Débouchés :</strong> Ingénieur réseaux télécoms, Architecte cloud, Consultant cybersécurité</p>
-                            <button class="btn btn-small" onclick="showIngenieurInfo()">📘 En savoir plus</button>
-                        </div>
+                        <div class="card-img"><img src="photo/info.png" alt="Ingénieur"></div>
+                        <div class="card-content"><span class="badge-ing">Diplôme National d'Ingénieur</span><h3>Ingénieur en Téléinformatique</h3><p>Formation unique en Tunisie (3 ans). Réseaux 5G, Cloud, IA, IoT.</p><button class="btn btn-small" onclick="showIngenieurInfo()">En savoir plus</button></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Masters Section -->
+            <!-- Masters -->
             <section id="masters" class="section">
-                <h2 class="section-title">🎓 Mastères</h2>
-                <p class="section-subtitle">6 formations de spécialisation pour approfondir vos compétences</p>
+                <h2 class="section-title">Mastères</h2>
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-shield-alt fa-4x"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-master">Mastère Professionnel</span>
-                            <h3>Sécurité et Services des Réseaux</h3>
-                            <p>Cybersécurité, audit, cryptographie, sécurité des réseaux mobiles et IoT.</p>
-                            <button class="btn btn-small" onclick="showMasterInfo('Sécurité et Services des Réseaux')">En savoir plus</button>
-                        </div>
+                        <div class="card-img"><img src="photo/securite.jpg" alt="Sécurité"></div>
+                        <div class="card-content"><span class="badge-master">Professionnel</span><h3>Sécurité & Réseaux</h3><p>Cybersécurité, audit, cryptographie.</p><button class="btn btn-small" onclick="showMasterInfo('Sécurité')">Détails</button></div>
                     </div>
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-cloud fa-4x"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-master">Mastère Professionnel</span>
-                            <h3>Services du Web et du Multimédia</h3>
-                            <p>Développement web avancé, microservices, DevOps, cloud native, gestion de projets digitaux.</p>
-                            <button class="btn btn-small" onclick="showMasterInfo('Services du Web et du Multimédia')">En savoir plus</button>
-                        </div>
+                        <div class="card-img"><img src="photo/web.jpg" alt="Web"></div>
+                        <div class="card-content"><span class="badge-master">Professionnel</span><h3>Web & Multimédia</h3><p>Microservices, DevOps, cloud native.</p><button class="btn btn-small" onclick="showMasterInfo('Web')">Détails</button></div>
                     </div>
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-brain fa-4x"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-master">Mastère de Recherche</span>
-                            <h3>Intelligence Artificielle et Analyse des Données</h3>
-                            <p>Machine Learning, Deep Learning, Big Data, NLP, vision par ordinateur.</p>
-                            <button class="btn btn-small" onclick="showMasterInfo('Intelligence Artificielle')">En savoir plus</button>
-                        </div>
+                        <div class="card-img"><img src="photo/IA.jpeg" alt="IA"></div>
+                        <div class="card-content"><span class="badge-master">Recherche</span><h3>IA & Data Science</h3><p>Machine Learning, Deep Learning, Big Data.</p><button class="btn btn-small" onclick="showMasterInfo('IA')">Détails</button></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Doctorat Section -->
+            <!-- Doctorat -->
             <section id="doctorat" class="section">
-                <h2 class="section-title">🎓 Doctorat</h2>
-                <p class="section-subtitle">Préparez une thèse en Sciences de l'Informatique</p>
+                <h2 class="section-title">Doctorat</h2>
                 <div class="cards-grid">
                     <div class="card">
-                        <div class="card-img"><i class="fas fa-graduation-cap fa-4x" style="color:#e74c3c;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-doctorat">Doctorat en Sciences de l'Informatique</span>
-                            <h3>Thèse de Doctorat</h3>
-                            <p>Formation doctorale en partenariat avec l'École Doctorale de l'Université de Sousse. Laboratoires : LabTIC, LISI, CRISTAL.</p>
-                            <button class="btn btn-small" onclick="showDoctoratInfo()">📘 Conditions d'admission</button>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img"><i class="fas fa-flask fa-4x" style="color:#e74c3c;"></i></div>
-                        <div class="card-content">
-                            <span class="badge-license badge-doctorat">Admission Doctorat</span>
-                            <h3>Conditions d'accès</h3>
-                            <ul style="margin-left: 1rem;">
-                                <li>Master de recherche (ou équivalent)</li>
-                                <li>Classement dans les meilleurs</li>
-                                <li>Projet de thèse validé</li>
-                            </ul>
-                        </div>
+                        <div class="card-img"><img src="photo/doctorat.png" alt="Doctorat"></div>
+                        <div class="card-content"><span class="badge-doctorat">Sciences de l'Informatique</span><h3>Thèse de Doctorat</h3><p>LabTIC, LISI, CRISTAL. IA, IoT, Cybersécurité, 5G/6G.</p><button class="btn btn-small" onclick="showDoctoratInfo()">Conditions</button></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Clubs Section -->
+            <!-- Clubs -->
             <section id="clubs" class="section">
                 <h2 class="section-title">Vie associative & clubs</h2>
-                <p class="section-subtitle">Découvrez les clubs de l'ISITCOM, rejoignez-les et suivez leurs actualités</p>
                 <div id="clubsGrid" class="cards-grid"></div>
-                <div style="margin-top: 3rem;">
-                    <h3 style="margin-bottom: 1.5rem; color: #003f5f; text-align: center;">📢 Actualités des clubs</h3>
-                    <div id="clubNewsFeed" class="resource-grid"></div>
-                </div>
             </section>
 
-            <!-- Cours Section -->
+            <!-- Cours -->
             <section id="cours" class="section">
                 <h2 class="section-title">Cours par formation</h2>
-                <p class="section-subtitle">Consultez et téléchargez les cours par filière</p>
                 <div class="resource-toolbar">
-                    <input type="search" id="courseSearch" placeholder="Rechercher un cours...">
-                    <select id="courseFormationFilter">
-                        <option value="all">Toutes les formations</option>
-                        <option value="Multimédia">Multimédia</option>
-                        <option value="IoT">IoT</option>
-                        <option value="Télécom">Télécom</option>
-                        <option value="Cycle Ingénieur">Cycle Ingénieur</option>
-                        <option value="Masters">Masters</option>
-                    </select>
-                    <button type="button" id="courseReset" class="btn">Réinitialiser</button>
+                    <input type="search" id="courseSearch" placeholder="Rechercher...">
+                    <select id="courseFormationFilter"><option value="all">Toutes</option><option>Multimédia</option><option>IoT</option><option>Télécom</option></select>
+                    <button id="courseReset" class="btn btn-small">Reset</button>
                 </div>
                 <div id="courseGrid" class="resource-grid"></div>
             </section>
 
             <!-- Ressources -->
             <section id="ressources" class="section">
-                <h2 class="section-title">Ressources pour étudiants</h2>
-                <p class="section-subtitle">Explorez les cours, examens et rapports PFE avec téléchargement direct</p>
+                <h2 class="section-title">Ressources</h2>
                 <div id="resourceGrid" class="resource-grid"></div>
             </section>
 
             <!-- Événements -->
             <section id="evenements" class="section">
-                <h2 class="section-title">Agenda & événements</h2>
-                <p class="section-subtitle">Calendrier interactif et inscription aux événements</p>
+                <h2 class="section-title">Événements</h2>
                 <div class="events-shell">
-                    <div class="calendar-card">
-                        <div class="calendar-header">
-                            <h3>Calendrier des événements</h3>
-                        </div>
-                        <div id="calendar"></div>
-                    </div>
-                    <div class="event-panel">
-                        <div class="event-panel-header">
-                            <h3>Événements à venir</h3>
-                        </div>
-                        <div id="eventList" class="event-list"></div>
-                    </div>
+                    <div class="calendar-card"><div id="calendar"></div></div>
+                    <div class="event-panel"><div id="eventList"></div></div>
                 </div>
             </section>
 
-            <!-- Formulaire d'inscription -->
+            <!-- Inscription améliorée -->
             <section id="inscription" class="section">
-                <h2 class="section-title">📝 Inscription Étudiante</h2>
-                <p class="section-subtitle">Rejoignez la communauté ISITCOM en remplissant ce formulaire</p>
-                
-                <div id="formSuccessMessage" class="success-message">
-                    ✅ Inscription réussie ! Bienvenue à l'ISITCOM.
-                </div>
-                
+                <h2 class="section-title">Inscription étudiante</h2>
+                <div id="formSuccessMessage" class="success-message">✅ Inscription réussie ! Bienvenue à l'ISITCOM.</div>
                 <form id="studentForm">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="nom">Nom *</label>
-                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
-                            <div class="error-message" id="error-nom">Veuillez saisir votre nom</div>
+                        <div class="form-group" id="group-nom">
+                            <label>Nom *</label>
+                            <input id="nom" type="text" placeholder="Votre nom">
+                            <div class="error-message" id="error-nom">Le nom est requis</div>
                         </div>
-                        <div class="form-group">
-                            <label for="prenom">Prénom *</label>
-                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
-                            <div class="error-message" id="error-prenom">Veuillez saisir votre prénom</div>
+                        <div class="form-group" id="group-prenom">
+                            <label>Prénom *</label>
+                            <input id="prenom" type="text" placeholder="Votre prénom">
+                            <div class="error-message" id="error-prenom">Le prénom est requis</div>
                         </div>
                     </div>
-                    
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="cin">Numéro CIN *</label>
-                            <input type="text" id="cin" name="cin" placeholder="Ex: 12345678" maxlength="12" required>
-                            <div class="error-message" id="error-cin">Veuillez saisir un numéro CIN valide (8 chiffres)</div>
+                        <div class="form-group" id="group-cin">
+                            <label>CIN (8 chiffres) *</label>
+                            <input id="cin" type="text" placeholder="12345678" maxlength="12">
+                            <div class="error-message" id="error-cin">Le CIN doit contenir 8 chiffres</div>
                         </div>
-                        <div class="form-group">
-                            <label for="classe">Classe / Formation *</label>
-                            <select id="classe" name="classe" required>
-                                <option value="">Sélectionnez votre formation</option>
-                                <option value="Licence Multimédia">Licence Multimédia</option>
-                                <option value="Licence IoT & Embarqué">Licence IoT & Embarqué</option>
-                                <option value="Licence Télécom & Réseaux">Licence Télécom & Réseaux</option>
-                                <option value="Cycle Ingénieur Téléinformatique">Cycle Ingénieur Téléinformatique</option>
-                                <option value="Master Sécurité des Réseaux">Master Sécurité des Réseaux</option>
-                                <option value="Master Services du Web">Master Services du Web</option>
-                                <option value="Master IA & Data Science">Master IA & Data Science</option>
-                                <option value="Doctorat">Doctorat</option>
+                        <div class="form-group" id="group-classe">
+                            <label>Formation *</label>
+                            <select id="classe">
+                                <option value="">Sélectionnez</option>
+                                <option>Licence Multimédia</option>
+                                <option>Licence IoT</option>
+                                <option>Licence Télécom</option>
+                                <option>Cycle Ingénieur</option>
+                                <option>Master</option>
                             </select>
-                            <div class="error-message" id="error-classe">Veuillez sélectionner votre formation</div>
+                            <div class="error-message" id="error-classe">Veuillez sélectionner une formation</div>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" placeholder="exemple@isitcom.rnu.tn" required>
-                        <div class="error-message" id="error-email">Veuillez saisir un email valide</div>
+                    <div class="form-group" id="group-email">
+                        <label>Email *</label>
+                        <input id="email" type="email" placeholder="exemple@isitcom.rnu.tn">
+                        <div class="error-message" id="error-email">Email invalide</div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="telephone">Téléphone</label>
-                        <input type="tel" id="telephone" name="telephone" placeholder="+216 XX XXX XXX">
-                    </div>
-                    
-                    <button type="submit" class="btn btn-submit">📌 S'inscrire maintenant</button>
+                    <button type="submit" class="btn btn-submit">S'inscrire maintenant</button>
                 </form>
             </section>
 
             <!-- Contact -->
             <section id="contact" class="section">
-                <h2 class="section-title">Contact & accès</h2>
+                <h2 class="section-title">Contact</h2>
                 <div class="cards-grid">
-                    <div class="card"><div class="card-content"><i class="fas fa-map-marker-alt"></i> <h3>Adresse</h3><p>Route GP1, Hammam Sousse 4011, Tunisie</p></div></div>
-                    <div class="card"><div class="card-content"><i class="fas fa-envelope"></i> <h3>Email</h3><p>contact@isitcom.rnu.tn</p></div></div>
-                    <div class="card"><div class="card-content"><i class="fas fa-globe"></i> <h3>Site officiel</h3><p>https://isitcom.rnu.tn</p></div></div>
-                    <div class="card"><div class="card-content"><i class="fas fa-phone"></i> <h3>Téléphone</h3><p>+216 73 123 456</p></div></div>
+                    <div class="card"><div class="card-content"><i class="fas fa-map-marker-alt"></i><h3>Adresse</h3><p>Route GP1, Hammam Sousse 4011</p></div></div>
+                    <div class="card"><div class="card-content"><i class="fas fa-envelope"></i><h3>Email</h3><p>contact@isitcom.rnu.tn</p></div></div>
+                    <div class="card"><div class="card-content"><i class="fas fa-globe"></i><h3>Site</h3><p>isitcom.rnu.tn</p></div></div>
                 </div>
             </section>
         </div>
@@ -1046,355 +719,165 @@
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-section"><h4>ISITCOM</h4><p>Institut Supérieur d'Informatique et des Technologies de Communication – Université de Sousse. Créée en 2001.</p></div>
-            <div class="footer-section"><h4>Formations</h4><p>Licences • Cycle Ingénieur • Masters • Doctorat</p></div>
-            <div class="footer-section"><h4>Liens utiles</h4><p>📘 Moodle • 📚 Bibliothèque numérique • 🎓 Espace carrière</p></div>
+            <div class="footer-section"><h4>ISITCOM</h4><p>Hammam Sousse - Tunisie<br>Créée en 2001</p></div>
+            <div class="footer-section"><h4>Formations</h4><p>Licences • Ingénieur • Masters • Doctorat</p></div>
             <div class="footer-section"><h4>Suivez-nous</h4><div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
         </div>
-        <div class="footer-bottom"><p>© 2026 ISITCOM – Projet PFA (Méthodologie Agile) – Données actualisées</p></div>
+        <div class="footer-bottom"><p>© 2026 ISITCOM – Projet PFA – Méthodologie Agile</p></div>
     </footer>
 
-    <!-- Modal -->
-    <div id="modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3 id="modal-title"></h3><div id="modal-message"></div><button onclick="closeModal()" class="btn" style="margin-top:1rem;">Fermer</button></div></div>
+    <div id="modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3 id="modal-title"></h3><div id="modal-message"></div><button onclick="closeModal()" class="btn btn-small">Fermer</button></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
     <script>
-        // Données des clubs
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+
+        // Clubs
         const clubs = [
-            {
-                id: 1,
-                name: "ATAST ISITCOM",
-                category: "🏆 Club Technologique",
-                icon: "fas fa-robot",
-                color: "#667eea",
-                description: "Club des technologies avancées : ateliers IoT, compétitions nationales, projet 'Force' (IA pour le sport) lauréat à ExpoScience.",
-                members: 120,
-                achievements: ["Best Club of the Year 2025", "Best Collaboration B-TECH Competition"]
-            },
-            {
-                id: 2,
-                name: "Club ARSII",
-                category: "🤖 Robotique & IA",
-                icon: "fas fa-microchip",
-                color: "#f5576c",
-                description: "Association Robotique et Systèmes Intelligents et Innovants. Robotique, intelligence artificielle, projets embarqués, participation aux compétitions internationales comme RoboCup.",
-                members: 85,
-                achievements: ["Participation RoboCup 2025", "Projets IA embarquée"]
-            },
-            {
-                id: 3,
-                name: "Club Culturel ISITCOM",
-                category: "🎬 Culture & Cinéma",
-                icon: "fas fa-film",
-                color: "#38f9d7",
-                description: "Projections de films, courts-métrages ('Saïr', 'The Bus'), rencontres avec des réalisateurs et échanges inter-établissements avec l'École ISIS.",
-                members: 65,
-                achievements: ["2 films produits", "Rencontres avec réalisateurs"]
-            }
+            { name: "ATAST ISITCOM", category: "Technologies Avancées", img: "photo/atast.jpg", desc: "Club des technologies avancées. Ateliers IoT, hackathons, projet 'Force' (IA pour le sport). Lauréat 'Best Club of the Year' 2025.", members: 120, achievements: ["Best Club 2025", "Prix innovation IoT"] },
+            { name: "ARSII", category: "Robotique & IA", img: "photo/arsii.png", desc: "Association Robotique et Systèmes Intelligents. Robotique mobile, drones, IA embarquée. Participation à RoboCup.", members: 85, achievements: ["Finaliste RoboCup 2025"] },
+            { name: "Google Developer Student Club", category: "Technologies & Innovation", img: "photo/google.png", desc: "Club officiel Google. Ateliers Android, Flutter, Google Cloud, organisation de Google I/O Extended.", members: 110, achievements: ["Google I/O Extended 2025"] },
+            { name: "Radiocom Club", category: "Télécommunications & Radio", img: "photo/radiocom.jpg", desc: "Club radioamateur. Sessions de communication radio, ateliers SDR, concours de transmission.", members: 45, achievements: ["Station radio amateur", "Concours 2025"] }
         ];
 
-        // Actualités des clubs
-        const clubNews = [
-            { id: 1, club: "ATAST", title: "Victoire à la B-TECH Competition 2025", date: "26 mars 2025", content: "L'équipe ATAST remporte le prix 'Best Club of the Year' et 'Best Collaboration'." },
-            { id: 2, club: "ARSII", title: "Participation à RoboCup 2025", date: "15 mars 2025", content: "L'équipe ARSII représentera la Tunisie à la compétition internationale de robotique." },
-            { id: 3, club: "Club Culturel", title: "Projection du court-métrage 'Saïr'", date: "10 mars 2025", content: "Projection en avant-première du court-métrage réalisé par les étudiants de l'ISITCOM." }
-        ];
-
-        // Données des cours
         const courses = [
-            { id: 1, title: 'Développement Front-End React', formation: 'Multimédia', teacher: 'Dr. Ben Ali', fileUrl: '#' },
-            { id: 2, title: 'Architecture IoT et Protocoles MQTT', formation: 'IoT', teacher: 'Pr. Mansouri', fileUrl: '#' },
-            { id: 3, title: 'Réseaux IP Avancés', formation: 'Télécom', teacher: 'Dr. Khelil', fileUrl: '#' },
-            { id: 4, title: 'Cloud & Virtualisation', formation: 'Cycle Ingénieur', teacher: 'Pr. Hamdi', fileUrl: '#' },
-            { id: 5, title: 'Machine Learning', formation: 'Masters', teacher: 'Dr. Chaabane', fileUrl: '#' }
+            { title: "Développement Front-End React", formation: "Multimédia", teacher: "Dr. Ben Ali" },
+            { title: "Architecture IoT et MQTT", formation: "IoT", teacher: "Pr. Mansouri" },
+            { title: "Réseaux 5G et Sécurité", formation: "Télécom", teacher: "Dr. Khelil" }
         ];
 
-        // Données des ressources
         const resources = [
-            { id: 1, title: 'Cours React', type: 'cours', formation: 'Multimédia', description: 'Supports de cours React et exercices', fileUrl: '#' },
-            { id: 2, title: 'Examen IoT 2025', type: 'examens', formation: 'IoT', description: 'Sujet examen IoT avec corrigé', fileUrl: '#' },
-            { id: 3, title: 'PFE Sécurité 5G', type: 'pfe', formation: 'Télécom', description: 'Rapport PFE cybersécurité', fileUrl: '#' },
-            { id: 4, title: 'Cours Cloud', type: 'cours', formation: 'Cycle Ingénieur', description: 'Introduction au cloud computing', fileUrl: '#' },
-            { id: 5, title: 'Examen IA', type: 'examens', formation: 'Masters', description: 'Examen intelligence artificielle', fileUrl: '#' }
+            { title: "Cours React Complet", type: "cours", formation: "Multimédia", desc: "Support + exercices" },
+            { title: "Examen IoT 2025", type: "examen", formation: "IoT", desc: "Sujet + corrigé" },
+            { title: "PFE Cybersécurité 5G", type: "pfe", formation: "Télécom", desc: "Rapport complet" }
         ];
 
-        // Données des événements
         const events = [
-            { id: 1, title: 'Nuit de l\'Info', date: '2026-11-15', location: 'Amphi A', organizer: 'ATAST', description: 'Hackathon 24h', capacity: 100, registeredCount: 45 },
-            { id: 2, title: 'Journée Portes Ouvertes', date: '2026-03-28', location: 'Hall principal', organizer: 'ISITCOM', description: 'Découverte des formations', capacity: 200, registeredCount: 120 },
-            { id: 3, title: 'Conférence IA', date: '2026-04-05', location: 'LabTIC', organizer: 'ARSII', description: 'IA et Smart Cities', capacity: 80, registeredCount: 50 }
+            { id: 1, title: "Nuit de l'Info 2026", date: "2026-11-15", location: "Grand Amphi", organizer: "ATAST", desc: "Hackathon national de 24h", capacity: 150, registered: 78 },
+            { id: 2, title: "Journée Portes Ouvertes", date: "2026-03-28", location: "Hall principal", organizer: "ISITCOM", desc: "Découverte des formations", capacity: 300, registered: 210 },
+            { id: 3, title: "Conférence IA & Smart Cities", date: "2026-04-05", location: "LabTIC", organizer: "ARSII", desc: "IA appliquée aux villes intelligentes", capacity: 100, registered: 52 }
         ];
 
-        // Mobile menu
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        mobileMenu.addEventListener('click', () => {
-            if (navLinks.style.display === 'flex') navLinks.style.display = 'none';
-            else { navLinks.style.display = 'flex'; navLinks.style.flexDirection = 'column'; navLinks.style.position = 'absolute'; navLinks.style.top = '70px'; navLinks.style.left = '0'; navLinks.style.width = '100%'; navLinks.style.backgroundColor = 'white'; navLinks.style.padding = '1rem'; navLinks.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)'; }
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) { target.scrollIntoView({ behavior: 'smooth' }); if (window.innerWidth <= 768) navLinks.style.display = 'none'; }
-            });
-        });
-
-        function showModal(title, msg) { 
-            document.getElementById('modal-title').innerText = title; 
-            document.getElementById('modal-message').innerHTML = msg; 
-            document.getElementById('modal').style.display = 'flex'; 
-        }
-        function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        window.onclick = function(e) { if (e.target == document.getElementById('modal')) closeModal(); };
-
-        // Rendu des clubs
         function renderClubs() {
-            const clubsGrid = document.getElementById('clubsGrid');
-            clubsGrid.innerHTML = clubs.map(club => `
-                <div class="card" onclick="showClubInfo('${club.name}')">
-                    <div class="card-img" style="background: linear-gradient(135deg, ${club.color}20, ${club.color}40);">
-                        <i class="${club.icon} fa-4x" style="color:${club.color};"></i>
-                    </div>
+            document.getElementById('clubsGrid').innerHTML = clubs.map(c => `
+                <div class="card" onclick="showClubInfo('${c.name}')">
+                    <div class="card-img"><img src="${c.img}" alt="${c.name}"></div>
                     <div class="card-content">
-                        <span class="club-badge">${club.category}</span>
-                        <h3>${club.name}</h3>
-                        <p>${club.description}</p>
-                        <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <span style="background:#eef8f9; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.7rem;"><i class="fas fa-users"></i> ${club.members} membres</span>
-                            ${club.achievements.map(a => `<span style="background:#eef8f9; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.7rem;"><i class="fas fa-trophy"></i> ${a}</span>`).join('')}
-                        </div>
+                        <span class="club-badge">${c.category}</span>
+                        <h3>${c.name}</h3>
+                        <p>${c.desc.substring(0, 100)}...</p>
+                        <span><i class="fas fa-users"></i> ${c.members} membres</span>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Rendu des actualités des clubs
-        function renderClubNews() {
-            const newsFeed = document.getElementById('clubNewsFeed');
-            newsFeed.innerHTML = clubNews.map(news => `
-                <div class="resource-card">
-                    <div class="resource-card-top">
-                        <span class="resource-card-icon"><i class="fas fa-newspaper"></i></span>
-                        <span class="resource-tag">${news.club}</span>
-                    </div>
-                    <h3>${news.title}</h3>
-                    <p>${news.content}</p>
-                    <div class="resource-meta"><span>Publié le ${news.date}</span></div>
-                </div>
-            `).join('');
-        }
-
-        // Rendu des cours
         function renderCourses() {
-            const searchValue = document.getElementById('courseSearch').value.toLowerCase();
-            const formationValue = document.getElementById('courseFormationFilter').value;
-            
-            const filtered = courses.filter(course => {
-                const matchSearch = course.title.toLowerCase().includes(searchValue);
-                const matchFormation = formationValue === 'all' || course.formation === formationValue;
-                return matchSearch && matchFormation;
-            });
-            
-            const grid = document.getElementById('courseGrid');
-            if (filtered.length === 0) {
-                grid.innerHTML = '<div class="resource-empty">Aucun cours trouvé</div>';
-                return;
-            }
-            
-            grid.innerHTML = filtered.map(course => `
-                <div class="resource-card">
-                    <div class="resource-card-top">
-                        <span class="resource-card-icon"><i class="fas fa-book-open"></i></span>
-                        <span class="resource-tag">${course.formation}</span>
-                    </div>
-                    <h3>${course.title}</h3>
-                    <p>Enseignant : ${course.teacher}</p>
-                    <div class="resource-actions">
-                        <a class="resource-download" href="${course.fileUrl}"><i class="fas fa-download"></i> Télécharger</a>
-                    </div>
-                </div>
+            let f = document.getElementById('courseFormationFilter').value;
+            let filtered = courses.filter(c => f === 'all' || c.formation === f);
+            document.getElementById('courseGrid').innerHTML = filtered.map(c => `
+                <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-book-open"></i></div><h3>${c.title}</h3><p>${c.teacher}</p><a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a></div>
             `).join('');
         }
-        
-        // Rendu des ressources
+
         function renderResources() {
-            const grid = document.getElementById('resourceGrid');
-            grid.innerHTML = resources.map(res => `
-                <div class="resource-card">
-                    <div class="resource-card-top">
-                        <span class="resource-card-icon"><i class="fas fa-file"></i></span>
-                        <span class="resource-tag">${res.type}</span>
-                    </div>
-                    <h3>${res.title}</h3>
-                    <p>${res.description}</p>
-                    <div class="resource-actions">
-                        <a class="resource-download" href="${res.fileUrl}"><i class="fas fa-download"></i> Télécharger</a>
-                    </div>
-                </div>
+            document.getElementById('resourceGrid').innerHTML = resources.map(r => `
+                <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-file-alt"></i></div><h3>${r.title}</h3><span class="resource-tag">${r.type}</span><p>${r.desc}</p><a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a></div>
             `).join('');
         }
-        
-        // Rendu des événements
-        function renderEventList() {
-            const list = document.getElementById('eventList');
-            list.innerHTML = events.map(event => {
-                const date = new Date(event.date);
-                const day = date.getDate();
-                const month = date.toLocaleDateString('fr-FR', { month: 'short' });
-                const remaining = event.capacity - event.registeredCount;
-                return `
-                    <div class="event-list-card">
-                        <div class="event-card-top">
-                            <div class="event-card-date">
-                                <div class="day">${day}</div>
-                                <div class="month">${month}</div>
-                            </div>
-                            <div style="flex:1">
-                                <h3>${event.title}</h3>
-                                <div class="event-card-meta">
-                                    <span>${event.location}</span>
-                                    <span>${event.organizer}</span>
-                                </div>
-                                <p>${event.description}</p>
-                                <button class="event-link-btn primary" onclick="openEventDetails(${event.id})">S'inscrire</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+
+        function renderEvents() {
+            document.getElementById('eventList').innerHTML = events.map(e => `
+                <div class="event-list-card"><h3>${e.title}</h3><p>📅 ${e.date} • 📍 ${e.location}</p><button class="event-link-btn primary" onclick="openEventDetails(${e.id})">S'inscrire</button></div>
+            `).join('');
         }
-        
-        function openEventDetails(eventId) {
-            const event = events.find(e => e.id === eventId);
-            showModal(event.title, `
-                <p><strong>Date :</strong> ${new Date(event.date).toLocaleDateString('fr-FR')}</p>
-                <p><strong>Lieu :</strong> ${event.location}</p>
-                <p><strong>Organisateur :</strong> ${event.organizer}</p>
-                <p>${event.description}</p>
-                <p><strong>Places disponibles :</strong> ${event.capacity - event.registeredCount}</p>
-                <button class="btn" style="margin-top:1rem;" onclick="closeModal()">Fermer</button>
-            `);
-        }
-        
+
         function renderCalendar() {
-            const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'fr',
-                events: events.map(e => ({ title: e.title, start: e.date })),
-                eventClick: (info) => {
-                    const event = events.find(e => e.title === info.event.title);
-                    if (event) openEventDetails(event.id);
-                }
+            let cal = new FullCalendar.Calendar(document.getElementById('calendar'), {
+                initialView: 'dayGridMonth', locale: 'fr',
+                events: events.map(e => ({ title: e.title, start: e.date }))
             });
-            calendar.render();
+            cal.render();
         }
-        
-        // Formulaire inscription
-        document.getElementById('studentForm').addEventListener('submit', function(e) {
+
+        function showModal(title, msg) { document.getElementById('modal-title').innerText = title; document.getElementById('modal-message').innerHTML = msg; document.getElementById('modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        function showClubInfo(name) { let c = clubs.find(x => x.name === name); showModal(name, `<p>${c.desc}</p><p><strong>👥 Membres :</strong> ${c.members}</p><p><strong>🏆 Réalisations :</strong> ${c.achievements.join(', ')}</p>`); }
+        function showLicenceDetails(l) { showModal(l, `Informations sur la licence ${l}.`); }
+        function showIngenieurInfo() { showModal("Cycle Ingénieur", "Diplôme National d'Ingénieur en Téléinformatique. Durée : 3 ans. Stages en entreprise."); }
+        function showMasterInfo(m) { showModal("Mastère", "Formation spécialisée avec stages et projets de recherche."); }
+        function showDoctoratInfo() { showModal("Doctorat", "Conditions : Master recherche, projet de thèse, concours sur dossier."); }
+        function openEventDetails(id) { let e = events.find(x => x.id === id); showModal(e.title, `${e.desc}<br><br>📅 ${e.date}<br>📍 ${e.location}<br>👥 Places restantes : ${e.capacity - e.registered}`); }
+
+        // Formulaire avec animations et validation améliorée
+        document.getElementById('studentForm').addEventListener('submit', (e) => {
             e.preventDefault();
             let isValid = true;
-            
+
+            // Réinitialiser les erreurs
+            document.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
+            document.querySelectorAll('.error-message').forEach(m => m.style.display = 'none');
+
             const nom = document.getElementById('nom').value.trim();
-            if (nom === '') { document.getElementById('error-nom').style.display = 'block'; isValid = false; }
-            else { document.getElementById('error-nom').style.display = 'none'; }
-            
+            if (!nom) {
+                document.getElementById('group-nom').classList.add('error');
+                document.getElementById('error-nom').style.display = 'block';
+                isValid = false;
+            }
+
             const prenom = document.getElementById('prenom').value.trim();
-            if (prenom === '') { document.getElementById('error-prenom').style.display = 'block'; isValid = false; }
-            else { document.getElementById('error-prenom').style.display = 'none'; }
-            
+            if (!prenom) {
+                document.getElementById('group-prenom').classList.add('error');
+                document.getElementById('error-prenom').style.display = 'block';
+                isValid = false;
+            }
+
             const cin = document.getElementById('cin').value.trim();
-            const cinRegex = /^[0-9]{8}$/;
-            if (cin === '' || !cinRegex.test(cin)) { document.getElementById('error-cin').style.display = 'block'; isValid = false; }
-            else { document.getElementById('error-cin').style.display = 'none'; }
-            
+            if (!/^\d{8}$/.test(cin)) {
+                document.getElementById('group-cin').classList.add('error');
+                document.getElementById('error-cin').style.display = 'block';
+                isValid = false;
+            }
+
             const classe = document.getElementById('classe').value;
-            if (classe === '') { document.getElementById('error-classe').style.display = 'block'; isValid = false; }
-            else { document.getElementById('error-classe').style.display = 'none'; }
-            
+            if (!classe) {
+                document.getElementById('group-classe').classList.add('error');
+                document.getElementById('error-classe').style.display = 'block';
+                isValid = false;
+            }
+
             const email = document.getElementById('email').value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === '' || !emailRegex.test(email)) { document.getElementById('error-email').style.display = 'block'; isValid = false; }
-            else { document.getElementById('error-email').style.display = 'none'; }
-            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('group-email').classList.add('error');
+                document.getElementById('error-email').style.display = 'block';
+                isValid = false;
+            }
+
             if (isValid) {
                 const successMsg = document.getElementById('formSuccessMessage');
                 successMsg.style.display = 'block';
                 document.getElementById('studentForm').reset();
-                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-                showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} pour votre inscription !<br><br>📌 Formation : ${classe}<br>Bienvenue à l'ISITCOM !`);
+                setTimeout(() => successMsg.style.display = 'none', 5000);
+                showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} !<br><br>📌 Formation : ${classe}<br>📧 Un email de confirmation a été envoyé à ${email}<br><br>Bienvenue à l'ISITCOM !`);
+            } else {
+                // Faire défiler jusqu'au premier champ en erreur
+                const firstError = document.querySelector('.form-group.error');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
-        
-        // Fonctions d'affichage des informations
-        function showLicenceDetails(licence) {
-            const messages = {
-                'Multimédia': '<strong>Licence Technologies du Multimédia</strong><br><br>📚 Programme : React, Node.js, PHP, UI/UX, Graphisme 3D<br>🎯 Débouchés : Développeur full-stack, Chef de projet digital',
-                'IoT': '<strong>Licence IoT & Embarqué</strong><br><br>📚 Programme : Arduino, Raspberry Pi, Réseaux IoT, Traitement du signal<br>🎯 Débouchés : Ingénieur IoT, Concepteur embarqué',
-                'Télécom': '<strong>Licence Technologies des Communications</strong><br><br>📚 Programme : Réseaux IP, Télécom optiques, Cybersécurité<br>🎯 Débouchés : Admin réseaux, Consultant cybersécurité'
-            };
-            showModal(`📘 ${licence}`, messages[licence]);
-        }
-        
-        function showIngenieurInfo() {
-            showModal('🎓 Cycle Ingénieur', '<strong>Diplôme National d\'Ingénieur en Téléinformatique</strong><br><br>📅 3 ans<br>📚 Réseaux 5G, Cybersécurité, Cloud, IA, IoT<br>💼 Stage de 6 mois en entreprise');
-        }
-        
-        function showMasterInfo(master) {
-            const messages = {
-                'Sécurité et Services des Réseaux': '<strong>Mastère en Cybersécurité</strong><br>Audit, cryptographie, sécurité IoT',
-                'Services du Web et du Multimédia': '<strong>Mastère Web & Multimédia</strong><br>Microservices, DevOps, Cloud native',
-                'Intelligence Artificielle': '<strong>Mastère IA & Data Science</strong><br>Machine Learning, Deep Learning, Big Data'
-            };
-            showModal(`📘 ${master}`, messages[master]);
-        }
-        
-        function showDoctoratInfo() {
-            showModal('🎓 Doctorat', 'Conditions : Master recherche, projet de thèse, concours sur dossier. Laboratoires : LabTIC, LISI, CRISTAL');
-        }
-        
-        function showClubInfo(clubName) {
-            const club = clubs.find(c => c.name === clubName);
-            if (club) {
-                showModal(`🎭 ${club.name}`, `
-                    <p><strong>${club.category}</strong></p>
-                    <p>${club.description}</p>
-                    <p><strong>👥 Membres :</strong> ${club.members}</p>
-                    <p><strong>🏆 Réalisations :</strong> ${club.achievements.join(', ')}</p>
-                    <button class="btn" style="margin-top:1rem;" onclick="closeModal()">Fermer</button>
-                `);
-            }
-        }
-        
-        // Initialisation
-        document.getElementById('courseReset').addEventListener('click', () => {
-            document.getElementById('courseSearch').value = '';
-            document.getElementById('courseFormationFilter').value = 'all';
-            renderCourses();
-        });
-        document.getElementById('courseSearch').addEventListener('input', renderCourses);
-        document.getElementById('courseFormationFilter').addEventListener('change', renderCourses);
-        
-        renderClubs();
-        renderClubNews();
-        renderCourses();
-        renderResources();
-        renderEventList();
-        renderCalendar();
-        
-        // Animation au scroll
-        const observer = new IntersectionObserver((entries) => { 
-            entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } }); 
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.section, .card, .resource-card, .event-list-card').forEach(el => { 
-            el.style.opacity = '0'; 
-            el.style.transform = 'translateY(20px)'; 
-            el.style.transition = 'all 0.6s'; 
-            observer.observe(el); 
-        });
+
+        document.getElementById('courseReset').onclick = () => { document.getElementById('courseFormationFilter').value = 'all'; renderCourses(); };
+        document.getElementById('courseSearch').oninput = renderCourses;
+        document.getElementById('courseFormationFilter').onchange = renderCourses;
+
+        document.querySelector('.mobile-menu').onclick = () => { let l = document.querySelector('.nav-links'); l.style.display = l.style.display === 'flex' ? 'none' : 'flex'; };
+        window.onclick = (e) => { if (e.target === document.getElementById('modal')) closeModal(); };
+
+        renderClubs(); renderCourses(); renderResources(); renderEvents(); renderCalendar();
     </script>
 </body>
 </html>
